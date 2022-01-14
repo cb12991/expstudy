@@ -17,6 +17,9 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/cb12991/expstudy/workflows/R-CMD-check/badge.svg)](https://github.com/cb12991/expstudy/actions)
+[![CRAN status](https://www.r-pkg.org/badges/version/expstudy)](https://CRAN.R-project.org/package=expstudy)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Launch binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/cb12991/expstudy/main)
 <!-- badges: end -->
 
 The goal of __expstudy__ is to provide a set of tools to quickly conduct analysis of an experience study. Commonly used techniques (such as actual-to-expected analysis) are generalized and streamlined so that repetitive coding is avoided. 
