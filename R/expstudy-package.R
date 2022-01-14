@@ -11,12 +11,13 @@
 #' @aliases NULL expstudy-package
 #' @import rlang dtplyr
 #' @importFrom utils head tail
+#' @importFrom pillar glimpse
 #' @importFrom dplyr %>% across pull as_tibble any_of all_of everything arrange
-#' @importFrom dplyr collect compute count distinct filter group_by group_map
-#' @importFrom dplyr group_modify intersect left_join mutate relocate rename
-#' @importFrom dplyr rename_with select setdiff slice slice_head slice_max
-#' @importFrom dplyr slice_min slice_tail summarise transmute ungroup union
-#' @importFrom dplyr union_all
+#' @importFrom dplyr collect compute count distinct filter group_by
+#' @importFrom dplyr group_map group_modify intersect left_join mutate relocate
+#' @importFrom dplyr rename rename_with select setdiff slice slice_head
+#' @importFrom dplyr slice_max slice_min slice_tail summarise transmute ungroup
+#' @importFrom dplyr union union_all
 #' @importFrom data.table as.data.table
 #' @importFrom tidyr pivot_longer pivot_wider complete drop_na expand fill nest
 #' @importFrom tidyr replace_na separate

@@ -9,7 +9,7 @@ update_meta <- function(new, old) {
   return(
     structure(
       .Data = new,
-      class = c('tbl_es', class(new)),
+      class = unique(c('tbl_es', class(new))),
       metric_vars = attr(old, 'metric_vars'),
       metrics_applied = attr(old, 'metrics_applied')
     )

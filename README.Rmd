@@ -18,23 +18,19 @@ knitr::opts_chunk$set(
 # expstudy
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/cb12991/expstudy/workflows/R-CMD-check/badge.svg)](https://github.com/cb12991/expstudy/actions)
 <!-- badges: end -->
 
-The goal of __expstudy__ is to provide a set of tools to quickly conduct analysis of an experience study. Commonly used techniques (such as actual-to-expected analysis) are generalized and streamlines so that repetitive coding is avoided. 
-
-## Prerequisites
-
-*  You will need to be able to access the Ameritas Bitbucket repository. Please refer to [this Confluence article](https://confluence.ameritas.com/pages/viewpage.action?pageId=93457168 "Version Control (Git)") for detail on how to do so.
-*  To connect RStudio to Bitbucket, you will need to have set up your SSH key and added it to your Bitbucket profile. Please refer to [yet another Confluence article](https://confluence.ameritas.com/display/ACC/Version+Control+in+Rstudio "SSH Key Setup") for detail on how to do so.
-*  R and RStudio need to be installed on your machine in a local directory, such as C:\\Users\\<corporate login ID>. 
+The goal of __expstudy__ is to provide a set of tools to quickly conduct analysis of an experience study. Commonly used techniques (such as actual-to-expected analysis) are generalized and streamlined so that repetitive coding is avoided. 
 
 ## Installation
 
 ```{r, eval = FALSE} 
 # This package has not yet been submitted to CRAN, however,
-# you can install the development version from Bitbucket:
+# you can install the development version from GitHub:
+
 # install.packages('devtools')
-devtools::install_bitbucket('CorpActuarial/expstudy')
+devtools::install_github('cb12991/expstudy')
 ```
 
 ## Usage
@@ -60,6 +56,10 @@ dataset <- data.frame(
 Now you can convert to an `expstudy` object:
 
 ```{r}
+# Only need to specify which variables correlate to metric variable `actuals`, 
+# `expecteds`, and `exposures`. `variances` and `keys` are beneficial, but not
+# required. 
+
 es <- expstudy(
   data = dataset,
   actuals = ACTUAL_DEATHS,
@@ -71,11 +71,18 @@ es <- expstudy(
 With this `expstudy` object, a quick example can be shown using `compile_results()`:
 
 ```{r}
-compile_results(
+# We will supply only the dataset and grouping variables to use for the 
+# summaries to generate a more robust list of results. 
+
+results <- compile_results(
   expstudy = es,
   GENDER,
   ATTAINED_AGE
 )
 ```
 
-The `compile_results()` function combines many `expstudy` functions to produce many summaries easily. You can review and trim the summaries down to what you want without much effort. An unformatted summary can be used for subsequent analysis, or a formatted summary can be quickly and simply inserted into a report for communicative purposes. 
+The `compile_results()` function combines many `expstudy` functions to produce many summaries easily. You can review and trim the summaries down to what you want without much effort. Since nothing other than the potential groupings were provided, `coompile_results()` will generate a nested list of summaries:
+
+
+
+An unformatted summary can be used for subsequent analysis, or a formatted summary can be quickly and simply inserted into a report for communicative purposes. 

@@ -13,6 +13,7 @@
 \alias{expand}
 \alias{fill}
 \alias{filter}
+\alias{glimpse}
 \alias{group_by}
 \alias{group_map}
 \alias{group_modify}
@@ -49,6 +50,8 @@ below to see their documentation.
 
 \describe{
   \item{dplyr}{\code{\link[dplyr]{arrange}}, \code{\link[dplyr:compute]{collect}}, \code{\link[dplyr]{compute}}, \code{\link[dplyr]{count}}, \code{\link[dplyr]{distinct}}, \code{\link[dplyr]{filter}}, \code{\link[dplyr]{group_by}}, \code{\link[dplyr]{group_map}}, \code{\link[dplyr:group_map]{group_modify}}, \code{\link[dplyr:reexports]{intersect}}, \code{\link[dplyr:mutate-joins]{left_join}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{relocate}}, \code{\link[dplyr]{rename}}, \code{\link[dplyr:rename]{rename_with}}, \code{\link[dplyr]{select}}, \code{\link[dplyr:reexports]{setdiff}}, \code{\link[dplyr]{slice}}, \code{\link[dplyr:slice]{slice_head}}, \code{\link[dplyr:slice]{slice_max}}, \code{\link[dplyr:slice]{slice_min}}, \code{\link[dplyr:slice]{slice_tail}}, \code{\link[dplyr]{summarise}}, \code{\link[dplyr:mutate]{transmute}}, \code{\link[dplyr:group_by]{ungroup}}, \code{\link[dplyr:reexports]{union}}, \code{\link[dplyr:setops]{union_all}}}
+
+  \item{pillar}{\code{\link[pillar]{glimpse}}}
 
   \item{tidyr}{\code{\link[tidyr]{complete}}, \code{\link[tidyr]{drop_na}}, \code{\link[tidyr]{expand}}, \code{\link[tidyr]{fill}}, \code{\link[tidyr]{nest}}, \code{\link[tidyr]{pivot_longer}}, \code{\link[tidyr]{pivot_wider}}, \code{\link[tidyr]{replace_na}}, \code{\link[tidyr]{separate}}}
 
