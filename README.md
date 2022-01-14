@@ -6,6 +6,12 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/cb12991/expstudy/workflows/R-CMD-check/badge.svg)](https://github.com/cb12991/expstudy/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/expstudy)](https://CRAN.R-project.org/package=expstudy)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Launch
+binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/cb12991/expstudy/main)
 <!-- badges: end -->
 
 The goal of **expstudy** is to provide a set of tools to quickly conduct
@@ -151,8 +157,8 @@ results$UNFORMATTED$METRICS$`BY GENDER`
 #> # A tibble: 2 x 7
 #>   GENDER ACTUAL_DEATHS EXPECTED_DEATHS RECORD_YEARSPAN ACTUAL_TO_EXPECTED
 #> * <chr>          <dbl>           <dbl>           <dbl>              <dbl>
-#> 1 FEMALE        12506.          12658.          12585.              0.988
-#> 2 MALE          12648.          12671.          12483.              0.998
+#> 1 FEMALE        12680.          12493.          12486.               1.01
+#> 2 MALE          12550.          12497.          12499.               1.00
 #> # ... with 2 more variables: ACTUAL_TO_EXPOSED <dbl>, EXPECTED_TO_EXPOSED <dbl>
 ```
 
@@ -164,9 +170,9 @@ results$FORMATTED$PROPORTIONS$`BY ATTAINED_AGE`
 #> # A tibble: 3 x 7
 #>   ATTAINED_AGE ACTUAL_DEATHS EXPECTED_DEATHS RECORD_YEARSPAN PROP_ACTUAL_DEATHS
 #> * <chr>        <chr>         <chr>           <chr>           <chr>             
-#> 1 40 to 65     8,359.39      8,360.20        8,316.51        33.23%            
-#> 2 65+          8,394.15      8,457.91        8,368.34        33.37%            
-#> 3 Under 40     8,400.83      8,511.20        8,383.20        33.4%             
+#> 1 40 to 65     8,407.46      8,425.68        8,344.64        33.32%            
+#> 2 65+          8,573.68      8,565.03        8,487.43        33.98%            
+#> 3 Under 40     8,249.16      7,999.30        8,152.37        32.7%             
 #> # ... with 2 more variables: PROP_EXPECTED_DEATHS <chr>,
 #> #   PROP_RECORD_YEARSPAN <chr>
 ```
