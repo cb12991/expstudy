@@ -1,0 +1,81 @@
+---
+output: 
+  github_document:
+    df_print: paged
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# expstudy
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of __expstudy__ is to provide a set of tools to quickly conduct analysis of an experience study. Commonly used techniques (such as actual-to-expected analysis) are generalized and streamlines so that repetitive coding is avoided. 
+
+## Prerequisites
+
+*  You will need to be able to access the Ameritas Bitbucket repository. Please refer to [this Confluence article](https://confluence.ameritas.com/pages/viewpage.action?pageId=93457168 "Version Control (Git)") for detail on how to do so.
+*  To connect RStudio to Bitbucket, you will need to have set up your SSH key and added it to your Bitbucket profile. Please refer to [yet another Confluence article](https://confluence.ameritas.com/display/ACC/Version+Control+in+Rstudio "SSH Key Setup") for detail on how to do so.
+*  R and RStudio need to be installed on your machine in a local directory, such as C:\\Users\\<corporate login ID>. 
+
+## Installation
+
+```{r, eval = FALSE} 
+# This package has not yet been submitted to CRAN, however,
+# you can install the development version from Bitbucket:
+# install.packages('devtools')
+devtools::install_bitbucket('CorpActuarial/expstudy')
+```
+
+## Usage
+
+```{r example}
+library(expstudy)
+```
+
+First you need a dataset that can be used for an experience study:
+
+```{r}
+dataset <- data.frame(
+  GENDER = sample(c('MALE','FEMALE'), size = 10000, replace = TRUE),
+  ATTAINED_AGE = sample(
+    c('Under 40', '40 to 65', '65+'), size = 10000, replace = TRUE
+  ),
+  RECORD_YEARSPAN = runif(10000, max = 5),
+  EXPECTED_DEATHS = runif(10000, max = 5),
+  ACTUAL_DEATHS = runif(10000, max = 5)
+)
+```
+
+Now you can convert to an `expstudy` object:
+
+```{r}
+es <- expstudy(
+  data = dataset,
+  actuals = ACTUAL_DEATHS,
+  expecteds = EXPECTED_DEATHS,
+  exposures = RECORD_YEARSPAN
+)
+```
+
+With this `expstudy` object, a quick example can be shown using `compile_results()`:
+
+```{r}
+compile_results(
+  expstudy = es,
+  GENDER,
+  ATTAINED_AGE
+)
+```
+
+The `compile_results()` function combines many `expstudy` functions to produce many summaries easily. You can review and trim the summaries down to what you want without much effort. An unformatted summary can be used for subsequent analysis, or a formatted summary can be quickly and simply inserted into a report for communicative purposes. 
