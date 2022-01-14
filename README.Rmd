@@ -1,7 +1,5 @@
 ---
-output: 
-  github_document:
-    df_print: paged
+output: github_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -81,8 +79,26 @@ results <- compile_results(
 )
 ```
 
-The `compile_results()` function combines many `expstudy` functions to produce many summaries easily. You can review and trim the summaries down to what you want without much effort. Since nothing other than the potential groupings were provided, `coompile_results()` will generate a nested list of summaries:
+The `compile_results()` function combines many `expstudy` functions to produce many summaries. Since nothing other than the potential groupings were provided, `coompile_results()` will generate a nested list of summaries:
 
+```{r}
+glimpse(results)
+```
 
+An unformatted summary can be used for subsequent analysis...
 
-An unformatted summary can be used for subsequent analysis, or a formatted summary can be quickly and simply inserted into a report for communicative purposes. 
+```{r}
+results$UNFORMATTED$METRICS$`BY GENDER`
+```
+
+...and a formatted summary can be quickly and simply inserted into a report to distribute nicely. 
+
+```{r}
+results$FORMATTED$PROPORTIONS$`BY ATTAINED_AGE`
+```
+
+You can review and trim the summaries down to what you want without much effort. You also can access the formulae that are used in `compile_results()` to fully customize the analysis to fit your needs. 
+
+## Code of Conduct
+
+Please note that the expstudy project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
