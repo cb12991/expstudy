@@ -70,6 +70,13 @@ filter.tbl_es <- function(.data, ..., .preserve) {
 }
 
 #' @export
+pillar::glimpse
+#' @export
+glimpse.tbl_es <- function(x, width = NULL, ...) {
+  update_meta(NextMethod(), x)
+}
+
+#' @export
 dplyr::group_by
 #' @export
 group_by.tbl_es <- function(.data, ..., .add, .drop) {

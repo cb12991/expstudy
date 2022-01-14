@@ -2,26 +2,23 @@ Package: expstudy
 Title: Experience Study Tools for Analytics and Communications
 Version: 0.0.0.9000
 Authors@R: 
-    person(
-      'Cody','Buehler', 
-      email = 'cody.buehlert@ameritas.com', 
-      role = c('aut', 'cre')
-    )
-Description: A set of tools to help aid in the formation and analyses of 
-    recurring or novel experience studies. 
+    person("Cody", "Buehler", , "cody.buehlert@ameritas.com", role = c("aut", "cre"))
+Description: A set of tools to help aid in the formation and analyses of
+    recurring or novel experience studies.
 License: MIT + file LICENSE
+Imports: 
+    assertthat,
+    data.table,
+    dplyr,
+    dtplyr,
+    glue,
+    methods,
+    pillar,
+    purrr,
+    rlang,
+    stringr,
+    tidyr,
+    utils
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Imports: 
-    rlang,
-    data.table,
-    dtplyr,
-    dplyr,
-    purrr,
-    assertthat,
-    stringr,
-    tidyr,
-    glue,
-    methods, 
-    utils
