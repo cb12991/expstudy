@@ -2,7 +2,7 @@ Package: expstudy
 Title: Experience Study Tools for Analytics and Communications
 Version: 1.0.0
 Authors@R: 
-    person("Cody", "Buehler", , "cody.buehlert@ameritas.com", role = c("aut", "cre"))
+    person("Cody", "Buehler", , "cb12991@me.com", role = c("aut", "cre"))
 Description: A set of tools to help aid in the formation and analyses of
     recurring or novel experience studies.
 License: MIT + file LICENSE

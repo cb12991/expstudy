@@ -15,7 +15,7 @@ review an assumption's efficacy via actual-to-expected analysis in addition
 to exploring new relevant patterns or correlations.
 }
 \author{
-\strong{Maintainer}: Cody Buehler \email{cody.buehlert@ameritas.com}
+\strong{Maintainer}: Cody Buehler \email{cb12991@me.com}
 
 }
 \keyword{internal}
