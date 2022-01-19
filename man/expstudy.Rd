@@ -36,5 +36,8 @@ searches within the \code{\link[dtplyr:lazy_dt]{dtplyr::lazy_dt()}}. For more in
 an \code{expstudy}
 }
 \description{
-\code{expstudy()} creates a subclass, \code{\link{tbl_es}}, of a \code{\link[dtplyr:lazy_dt]{dtplyr::lazy_dt()}}.
+\code{expstudy()} creates a subclass, \code{\link{tbl_es}}, of a \code{\link[dtplyr:lazy_dt]{dtplyr::lazy_dt()}}, that
+stores attributes relating to an experience study.These attributes provide
+other package functions arguments which reduce time needed to review an
+assumption.
 }

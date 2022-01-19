@@ -172,5 +172,3 @@ add_metrics <- function(
   }
   expstudy %>% mutate(!!!oth_metrics, !!!metric_cols)
 }
-
-

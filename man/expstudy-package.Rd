@@ -10,14 +10,15 @@ A set of tools to help aid in the formation and analyses of recurring or novel e
 \details{
 The \code{expstudy} package provides an subclass, \link{tbl_es}, for
 \code{\link[dtplyr:lazy_dt]{dtplyr::lazy_dt()}} that stores attributes relating to an experience study.
-These attributes along with other functions reduces the time needed to
-review an assumption's efficacy via actual-to-expected analysis in addition
+These attributes along with other functions reduce the time needed to
+review an assumption via actual-to-expected analysis in addition
 to exploring new relevant patterns or correlations.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/cb12991/expstudy}
+  \item \url{https://cb12991.github.io/expstudy/}
   \item Report bugs at \url{https://github.com/cb12991/expstudy/issues}
 }
 

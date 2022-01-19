@@ -51,7 +51,6 @@ add_credibility <- function(
       )
     )
   }
-  z_p <- stats::qnorm((1 + .cred_p)/2)
 
   cred_cols <- set_names(list(), character())
   metrics_applied <- attr(expstudy, 'metrics_applied')
@@ -79,7 +78,11 @@ add_credibility <- function(
     .y = var_cols,
     .f = ~ parse_quo(
       glue(
-        'pmin(1, {.cred_k} * ', .x, '/', 'sqrt({z_p} * ', .y, ')'
+        'pmin(1, {.cred_k} * ',
+        .x,
+        '/', 'sqrt({stats::qnorm((1 + .cred_p) / 2)} * ',
+        .y,
+        ')'
       ),
       env = as_environment(result)
     )

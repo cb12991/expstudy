@@ -1,4 +1,3 @@
-#' @importFrom methods setOldClass
 #' @exportClass tbl_es
 setOldClass('tbl_es', 'dtplyr_step')
 

@@ -159,8 +159,8 @@ results$UNFORMATTED$METRICS$`BY GENDER`
 #> # A tibble: 2 x 7
 #>   GENDER ACTUAL_DEATHS EXPECTED_DEATHS RECORD_YEARSPAN ACTUAL_TO_EXPECTED
 #> * <chr>          <dbl>           <dbl>           <dbl>              <dbl>
-#> 1 FEMALE        12565.          12636.          12525.              0.994
-#> 2 MALE          12484.          12333.          12330.              1.01 
+#> 1 FEMALE        12520.          12450.          12663.              1.01 
+#> 2 MALE          12222.          12251.          12325.              0.998
 #> # ... with 2 more variables: ACTUAL_TO_EXPOSED <dbl>, EXPECTED_TO_EXPOSED <dbl>
 ```
 
@@ -172,9 +172,9 @@ results$FORMATTED$PROPORTIONS$`BY ATTAINED_AGE`
 #> # A tibble: 3 x 7
 #>   ATTAINED_AGE ACTUAL_DEATHS EXPECTED_DEATHS RECORD_YEARSPAN PROP_ACTUAL_DEATHS
 #> * <chr>        <chr>         <chr>           <chr>           <chr>             
-#> 1 40 to 65     8,577.01      8,525.76        8,475.69        34.24%            
-#> 2 65+          8,140.43      8,277.45        8,183.80        32.5%             
-#> 3 Under 40     8,331.92      8,165.44        8,195.98        33.26%            
+#> 1 40 to 65     8,028.04      8,021.21        8,249.02        32.45%            
+#> 2 65+          8,441.62      8,386.76        8,380.57        34.12%            
+#> 3 Under 40     8,272.31      8,293.46        8,358.14        33.43%            
 #> # ... with 2 more variables: PROP_EXPECTED_DEATHS <chr>,
 #> #   PROP_RECORD_YEARSPAN <chr>
 ```
@@ -187,5 +187,5 @@ effort. You also can access the formulae that are used in
 
 Please note that the expstudy project is released with a [Contributor
 Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+Conduct](https://cb12991.github.io/expstudy/CODE_OF_CONDUCT.html). By
+contributing to this project, you agree to abide by its terms.

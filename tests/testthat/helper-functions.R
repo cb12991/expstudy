@@ -10,5 +10,3 @@ attr_preserved <- function(x, f, ...) {
 class_preserved <- function(x, f, ...) {
   expect_s3_class(do.call(f, list2(x, ...)), class = 'tbl_es')
 }
-
-

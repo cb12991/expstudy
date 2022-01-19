@@ -6,7 +6,8 @@ Authors@R:
 Description: A set of tools to help aid in the formation and analyses of
     recurring or novel experience studies.
 License: MIT + file LICENSE
-URL: https://github.com/cb12991/expstudy
+URL: https://github.com/cb12991/expstudy,
+    https://cb12991.github.io/expstudy/
 BugReports: https://github.com/cb12991/expstudy/issues
 Imports: 
     assertthat,
@@ -22,14 +23,15 @@ Imports:
     purrr,
     rlang (>= 0.4.11),
     stringr,
+    tibble,
     tidyr,
+    tidyselect,
     utils,
     withr
 Suggests: 
-    roxygen2,
     covr,
-    testthat (>= 3.0.0),
-    tibble
+    roxygen2,
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -1,7 +1,10 @@
 #' Create an expstudy object
 #'
 #' @description
-#' `expstudy()` creates a subclass, [`tbl_es`], of a [dtplyr::lazy_dt()].
+#' `expstudy()` creates a subclass, [`tbl_es`], of a [dtplyr::lazy_dt()], that
+#' stores attributes relating to an experience study.These attributes provide
+#' other package functions arguments which reduce time needed to review an
+#' assumption.
 #'
 #' @param data
 #'   the dataset of an experience study. Can be any kind of organized data
@@ -90,11 +93,7 @@ expstudy <- function(
     )
   }
 
-  result <- lazy_dt(
-    x = as.data.table(data),
-    immutable = FALSE,
-    key_by = {{ keys }}
-  )
+  result <- lazy_dt(data, key_by = {{ keys }})
 
   return(
     structure(

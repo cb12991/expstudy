@@ -59,7 +59,7 @@ compile_results <- function(
 
   if (!is_empty(groups)) {
     group_combos <- map(
-      .x = 1:length(groups),
+      .x = seq_along(groups),
       .f = ~ combn(map_chr(groups, as_name), .x, simplify = FALSE)
     ) %>%
       squash %>%

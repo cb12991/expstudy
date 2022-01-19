@@ -16,7 +16,7 @@ format_metrics <- function(expstudy) {
     attr('metric_vars') %>%
     squash_chr
 
-  mets_app = expstudy %>%
+  mets_app <- expstudy %>%
     attr('metrics_applied') %>%
     as_tibble
 
@@ -26,9 +26,8 @@ format_metrics <- function(expstudy) {
     ) %>%
     pull(
       .data$name
-    ) %>% c(
-      met_vars
     ) %>%
+    c(met_vars) %>%
     unname
 
   percent_vars <- mets_app %>%

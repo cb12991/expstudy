@@ -50,7 +50,9 @@ test_that('pivot_wider method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, pivot_wider, names_from = 'SMOKING_STATUS', values_from = 'GENDER')
+    !!!list(
+      es, pivot_wider, names_from = 'SMOKING_STATUS', values_from = 'GENDER'
+    )
   )
 })
 

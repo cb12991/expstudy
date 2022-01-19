@@ -1,3 +1,18 @@
+
+# Passing an `expstudy` through a method often causes the attributes to be
+# dropped. This is a helper function that retains original attributes.
+#
+update_meta <- function(new, old) {
+  return(
+    structure(
+      .Data = new,
+      class = unique(c('tbl_es', class(new))),
+      metric_vars = attr(old, 'metric_vars'),
+      metrics_applied = attr(old, 'metrics_applied')
+    )
+  )
+}
+
 # dplyr ------------------------------------------------------------------------
 
 #' @export
@@ -233,7 +248,10 @@ drop_na.tbl_es <- function(data, ...) {
 
   suppressWarnings(
     expr = update_meta(
-      new = drop_na(out, ...),
+      new = drop_na(
+        data = out,
+        ...
+      ),
       old = data
     ),
     classes = c('warnings', 'messages')
@@ -292,7 +310,6 @@ fill.tbl_es <- function(
 #' @export
 tidyr::nest
 #' @export
-#'
 nest.tbl_es <- function(
   .data,
   ...,

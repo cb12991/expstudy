@@ -162,7 +162,13 @@ test_that('slice_min method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, slice_min, order_by = .data$EXPECTED_DEATHS, prop = .3, with_ties = FALSE)
+    !!!list(
+      es,
+      slice_min,
+      order_by = .data$EXPECTED_DEATHS,
+      prop = .3,
+      with_ties = FALSE
+    )
   )
 })
 

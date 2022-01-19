@@ -46,7 +46,9 @@ add_proportions <- function(
       unname
   }
 
-  if (ncol(expstudy) - length(.base_grp_nms) - length(prop_cols) < .min_ungrpd) {
+  if (
+    ncol(expstudy) - length(.base_grp_nms) - length(prop_cols) < .min_ungrpd
+  ) {
     .base_grp_nms <- character(0)
   }
 
