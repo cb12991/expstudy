@@ -11,6 +11,7 @@
 #' @aliases NULL expstudy-package
 #' @import rlang dtplyr
 #' @importFrom utils head tail
+#' @importFrom lifecycle deprecated
 #' @importFrom pillar glimpse
 #' @importFrom dplyr %>% across pull as_tibble any_of all_of everything arrange
 #' @importFrom dplyr collect compute count distinct filter group_by

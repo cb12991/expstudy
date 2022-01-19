@@ -12,6 +12,8 @@ Imports:
     dplyr,
     dtplyr,
     glue,
+    lifecycle,
+    magrittr,
     methods,
     pillar,
     purrr,
@@ -24,3 +26,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 URL: https://github.com/cb12991/expstudy
 BugReports: https://github.com/cb12991/expstudy/issues
+Suggests: 
+    tibble,
+    covr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

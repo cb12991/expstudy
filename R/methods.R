@@ -1,3 +1,5 @@
+# dplyr ------------------------------------------------------------------------
+
 #' @export
 dplyr::arrange
 #' @export
@@ -10,13 +12,6 @@ dplyr::collect
 #' @export
 collect.tbl_es <- function(x, ...) {
   update_meta(NextMethod(), x)
-}
-
-#' @export
-tidyr::complete
-#' @export
-complete.tbl_es <- function(data, ..., fill) {
-  update_meta(NextMethod(), data)
 }
 
 #' @export
@@ -38,28 +33,6 @@ dplyr::distinct
 #' @export
 distinct.tbl_es <- function(.data, ..., .keep_all) {
   update_meta(NextMethod(), .data)
-}
-
-#' @export
-tidyr::drop_na
-#' @export
-drop_na.tbl_es <- function(data, ...) {
-  update_meta(NextMethod(), data)
-}
-
-#' @export
-tidyr::expand
-#' @export
-expand.tbl_es <- function(data, ..., .name_repair) {
-  update_meta(NextMethod(), data)
-}
-
-
-#' @export
-tidyr::fill
-#' @export
-fill.tbl_es <- function(data, ..., .direction) {
-  update_meta(NextMethod(), data)
 }
 
 #' @export
@@ -98,13 +71,6 @@ group_modify.tbl_es <- function(.data, .f, ..., .keep) {
 }
 
 #' @export
-utils::head
-#' @export
-head.tbl_es <- function(x, ...) {
-  update_meta(NextMethod(), x)
-}
-
-#' @export
 dplyr::intersect
 #' @export
 intersect.tbl_es <- function(x, y, ...) {
@@ -123,34 +89,6 @@ dplyr::mutate
 #' @export
 mutate.tbl_es <- function(.data, ...) {
   update_meta(NextMethod(), .data)
-}
-
-#' @export
-tidyr::nest
-#' @export
-nest.tbl_es <- function(.data, ..., .names_sep, .key) {
-  update_meta(NextMethod(), .data)
-}
-
-#' @export
-tidyr::pivot_longer
-#' @export
-pivot_longer.tbl_es <- function(
-  data, cols, names_to, names_prefix, names_sep, names_pattern, names_ptypes,
-  names_transform, names_repair, values_to, values_drop_na, values_ptypes,
-  values_transform, ...
-) {
-  update_meta(NextMethod(), data)
-}
-
-#' @export
-tidyr::pivot_wider
-#' @export
-pivot_wider.tbl_es <- function(
-  data, id_cols, names_from, names_prefix, names_sep, names_glue, names_sort,
-  names_repair, values_from, values_fill, values_fn, ...
-) {
-  update_meta(NextMethod(), data)
 }
 
 #' @export
@@ -175,26 +113,10 @@ rename_with.tbl_es <- function(.data, .fn, .cols, ...) {
 }
 
 #' @export
-tidyr::replace_na
-#' @export
-replace_na.tbl_es <- function(data, replace, ...) {
-  update_meta(NextMethod(), data)
-}
-
-#' @export
 dplyr::select
 #' @export
 select.tbl_es <- function(.data, ...) {
   update_meta(NextMethod(), .data)
-}
-
-#' @export
-tidyr::separate
-#' @export
-separate.tbl_es <- function(
-  data, col, into, sep, remove, convert, extra, fill, ...
-) {
-  update_meta(NextMethod(), data)
 }
 
 #' @export
@@ -247,13 +169,6 @@ summarise.tbl_es <- function(.data, ..., .groups) {
 }
 
 #' @export
-utils::tail
-#' @export
-tail.tbl_es <- function(x, ...) {
-  update_meta(NextMethod(), x)
-}
-
-#' @export
 dplyr::transmute
 #' @export
 transmute.tbl_es <- function(.data, ...) {
@@ -278,5 +193,284 @@ union.tbl_es <- function(x, y, ...) {
 dplyr::union_all
 #' @export
 union_all.tbl_es <- function(x, y, ...) {
+  update_meta(NextMethod(), x)
+}
+
+# tidyr ------------------------------------------------------------------------
+
+# There is currently an issue with tidyr using tidyselect within a call to
+# NextMethod() for subclasses. Implement work around by manually removing class
+# and embracing required args.
+#
+# https://github.com/RConsortium/OOP-WG/issues/119
+
+#' @export
+tidyr::complete
+#' @export
+complete.tbl_es <- function(data, ..., fill = list()) {
+  out <- data
+  class(out) <- setdiff(class(data), 'tbl_es')
+
+  suppressWarnings(
+    expr = update_meta(
+      new = complete(
+        out,
+        ...,
+        fill = fill
+      ),
+      old = data
+    ),
+    classes = c('warnings', 'messages')
+  )
+}
+
+#' @export
+tidyr::drop_na
+#' @export
+drop_na.tbl_es <- function(data, ...) {
+  out <- data
+  class(out) <- setdiff(class(data), 'tbl_es')
+
+  suppressWarnings(
+    expr = update_meta(
+      new = drop_na(out, ...),
+      old = data
+    ),
+    classes = c('warnings', 'messages')
+  )
+}
+
+#' @export
+tidyr::expand
+#' @export
+expand.tbl_es <- function(
+  data,
+  ...,
+  .name_repair = "check_unique"
+) {
+  out <- data
+  class(out) <- setdiff(class(data), 'tbl_es')
+
+  suppressWarnings(
+    expr = update_meta(
+      new = expand(
+        out,
+        ...,
+        .name_repair = .name_repair
+      ),
+      old = data
+    ),
+    classes = c('warnings', 'messages')
+  )
+}
+
+
+#' @export
+tidyr::fill
+#' @export
+fill.tbl_es <- function(
+  data,
+  ...,
+  .direction = c("down", "up", "downup", "updown")
+) {
+  out <- data
+  class(out) <- setdiff(class(data), 'tbl_es')
+
+  suppressWarnings(
+    expr = update_meta(
+      new = fill(
+        out,
+        ...,
+        .direction = .direction
+      ),
+      old = data
+    ),
+    classes = c('warnings', 'messages')
+  )
+}
+
+#' @export
+tidyr::nest
+#' @export
+#'
+nest.tbl_es <- function(
+  .data,
+  ...,
+  .names_sep = NULL,
+  .key = deprecated()
+) {
+  out <- .data
+  class(out) <- setdiff(class(.data), 'tbl_es')
+
+  suppressWarnings(
+    expr = update_meta(
+      new = nest(
+        out,
+        ...,
+        .names_sep = .names_sep,
+        .key = .key
+      ),
+      old = .data
+    ),
+    classes = c('warnings', 'messages')
+  )
+}
+
+#' @export
+tidyr::pivot_longer
+#' @export
+pivot_longer.tbl_es <- function(
+  data,
+  cols,
+  names_to = "name",
+  names_prefix = NULL,
+  names_sep = NULL,
+  names_pattern = NULL,
+  names_ptypes = NULL,
+  names_transform = NULL,
+  names_repair = "check_unique",
+  values_to = "value",
+  values_drop_na = FALSE,
+  values_ptypes = NULL,
+  values_transform = NULL,
+  ...
+) {
+  out <- data
+  class(out) <- setdiff(class(data), 'tbl_es')
+
+  suppressWarnings(
+    expr = update_meta(
+        new = pivot_longer(
+          out,
+          {{ cols }},
+          names_to = names_to,
+          names_prefix = names_prefix,
+          names_sep = names_sep,
+          names_pattern = names_pattern,
+          names_ptypes = names_ptypes,
+          names_transform = names_transform,
+          names_repair = names_repair,
+          values_to = values_to,
+          values_drop_na = values_drop_na,
+          values_ptypes = values_ptypes,
+          values_transform = values_transform,
+          ...
+        ),
+        old = data
+      ),
+    classes = c('warnings', 'messages')
+  )
+}
+
+#' @export
+tidyr::pivot_wider
+#' @export
+pivot_wider.tbl_es <- function(
+  data,
+  id_cols = NULL,
+  names_from = name,
+  names_prefix = "",
+  names_sep = "_",
+  names_glue = NULL,
+  names_sort = FALSE,
+  names_repair = "check_unique",
+  values_from = value,
+  values_fill = NULL,
+  values_fn = NULL,
+  ...
+) {
+  out <- data
+  class(out) <- setdiff(class(data), 'tbl_es')
+
+  suppressWarnings(
+    expr = update_meta(
+      new = pivot_wider(
+        out,
+        id_cols = id_cols,
+        names_from = names_from,
+        names_prefix = names_prefix,
+        names_sep = names_sep,
+        names_glue = names_glue,
+        names_sort = names_sort,
+        names_repair = names_repair,
+        values_from = values_from,
+        values_fill = values_fill,
+        values_fn = values_fn,
+        ...
+      ),
+      old = data
+    ),
+    classes = c('warnings', 'messages')
+  )
+}
+
+#' @export
+tidyr::replace_na
+#' @export
+replace_na.tbl_es <- function(data, replace = list()) {
+  out <- data
+  class(out) <- setdiff(class(data), 'tbl_es')
+
+  suppressWarnings(
+    expr = update_meta(
+      new = replace_na(
+        out,
+        replace = replace
+      ),
+      old = data
+    ),
+    classes = c('warnings', 'messages')
+  )
+}
+
+#' @export
+tidyr::separate
+#' @export
+separate.tbl_es <- function(
+  data,
+  col,
+  into,
+  sep = '[^[:alnum:]]+',
+  remove = TRUE,
+  convert = FALSE,
+  extra = 'warn',
+  fill = 'warn',
+  ...
+) {
+  out <- data
+  class(out) <- setdiff(class(data), 'tbl_es')
+
+  suppressWarnings(
+    expr =
+      update_meta(
+        new = separate(
+          data = out,
+          col = {{ col }},
+          into = {{ into }},
+          sep = sep,
+          remove = remove,
+          convert = convert,
+          extra = extra,
+          ...
+        ),
+        old = data
+      ),
+    classes = c('warnings', 'messages')
+  )
+}
+
+# utils ------------------------------------------------------------------------
+
+#' @export
+utils::head
+#' @export
+head.tbl_es <- function(x, ...) {
+  update_meta(NextMethod(), x)
+}
+
+#' @export
+utils::tail
+#' @export
+tail.tbl_es <- function(x, ...) {
   update_meta(NextMethod(), x)
 }

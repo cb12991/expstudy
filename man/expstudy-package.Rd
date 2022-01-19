@@ -14,6 +14,14 @@ These attributes along with other functions reduces the time needed to
 review an assumption's efficacy via actual-to-expected analysis in addition
 to exploring new relevant patterns or correlations.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/cb12991/expstudy}
+  \item Report bugs at \url{https://github.com/cb12991/expstudy/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Cody Buehler \email{cb12991@me.com}
 
