@@ -159,8 +159,8 @@ results$UNFORMATTED$METRICS$`BY GENDER`
 #> # A tibble: 2 x 7
 #>   GENDER ACTUAL_DEATHS EXPECTED_DEATHS RECORD_YEARSPAN ACTUAL_TO_EXPECTED
 #> * <chr>          <dbl>           <dbl>           <dbl>              <dbl>
-#> 1 FEMALE        12790.          12437.          12620.               1.03
-#> 2 MALE          12449.          12427.          12508.               1.00
+#> 1 FEMALE        12565.          12636.          12525.              0.994
+#> 2 MALE          12484.          12333.          12330.              1.01 
 #> # ... with 2 more variables: ACTUAL_TO_EXPOSED <dbl>, EXPECTED_TO_EXPOSED <dbl>
 ```
 
@@ -172,9 +172,9 @@ results$FORMATTED$PROPORTIONS$`BY ATTAINED_AGE`
 #> # A tibble: 3 x 7
 #>   ATTAINED_AGE ACTUAL_DEATHS EXPECTED_DEATHS RECORD_YEARSPAN PROP_ACTUAL_DEATHS
 #> * <chr>        <chr>         <chr>           <chr>           <chr>             
-#> 1 40 to 65     8,561.83      8,497.79        8,509.70        33.92%            
-#> 2 65+          8,277.79      8,152.73        8,289.54        32.8%             
-#> 3 Under 40     8,399.25      8,213.31        8,328.16        33.28%            
+#> 1 40 to 65     8,577.01      8,525.76        8,475.69        34.24%            
+#> 2 65+          8,140.43      8,277.45        8,183.80        32.5%             
+#> 3 Under 40     8,331.92      8,165.44        8,195.98        33.26%            
 #> # ... with 2 more variables: PROP_EXPECTED_DEATHS <chr>,
 #> #   PROP_RECORD_YEARSPAN <chr>
 ```
