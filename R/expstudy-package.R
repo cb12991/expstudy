@@ -14,6 +14,14 @@
 
 ## usethis namespace: start
 #' @importFrom assertthat assert_that
+#' @importFrom data.table .BY
+#' @importFrom data.table .EACHI
+#' @importFrom data.table .GRP
+#' @importFrom data.table .I
+#' @importFrom data.table .N
+#' @importFrom data.table .NGRP
+#' @importFrom data.table .SD
+#' @importFrom data.table data.table
 #' @importFrom dplyr across
 #' @importFrom dplyr all_of
 #' @importFrom dplyr any_of
