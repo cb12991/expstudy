@@ -12,6 +12,8 @@ status](https://www.r-pkg.org/badges/version/expstudy)](https://CRAN.R-project.o
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Launch
 binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/cb12991/expstudy/main)
+[![Codecov test
+coverage](https://codecov.io/gh/cb12991/expstudy/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cb12991/expstudy?branch=main)
 <!-- badges: end -->
 
 The goal of **expstudy** is to provide a set of tools to quickly conduct
@@ -96,56 +98,56 @@ glimpse(results)
 #> List of 2
 #>  $ UNFORMATTED:List of 2
 #>   ..$ METRICS    :List of 4
-#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
 #>   ..$ PROPORTIONS:List of 4
-#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
 #>  $ FORMATTED  :List of 2
 #>   ..$ METRICS    :List of 4
-#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
 #>   ..$ PROPORTIONS:List of 4
-#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/dat..
+#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   .. .. ..- attr(*, "metric_vars")=List of 3
 #>   .. .. ..- attr(*, "metrics_applied")=List of 2
 ```
@@ -157,8 +159,8 @@ results$UNFORMATTED$METRICS$`BY GENDER`
 #> # A tibble: 2 x 7
 #>   GENDER ACTUAL_DEATHS EXPECTED_DEATHS RECORD_YEARSPAN ACTUAL_TO_EXPECTED
 #> * <chr>          <dbl>           <dbl>           <dbl>              <dbl>
-#> 1 FEMALE        12680.          12493.          12486.               1.01
-#> 2 MALE          12550.          12497.          12499.               1.00
+#> 1 FEMALE        12790.          12437.          12620.               1.03
+#> 2 MALE          12449.          12427.          12508.               1.00
 #> # ... with 2 more variables: ACTUAL_TO_EXPOSED <dbl>, EXPECTED_TO_EXPOSED <dbl>
 ```
 
@@ -170,9 +172,9 @@ results$FORMATTED$PROPORTIONS$`BY ATTAINED_AGE`
 #> # A tibble: 3 x 7
 #>   ATTAINED_AGE ACTUAL_DEATHS EXPECTED_DEATHS RECORD_YEARSPAN PROP_ACTUAL_DEATHS
 #> * <chr>        <chr>         <chr>           <chr>           <chr>             
-#> 1 40 to 65     8,407.46      8,425.68        8,344.64        33.32%            
-#> 2 65+          8,573.68      8,565.03        8,487.43        33.98%            
-#> 3 Under 40     8,249.16      7,999.30        8,152.37        32.7%             
+#> 1 40 to 65     8,561.83      8,497.79        8,509.70        33.92%            
+#> 2 65+          8,277.79      8,152.73        8,289.54        32.8%             
+#> 3 Under 40     8,399.25      8,213.31        8,328.16        33.28%            
 #> # ... with 2 more variables: PROP_EXPECTED_DEATHS <chr>,
 #> #   PROP_RECORD_YEARSPAN <chr>
 ```
