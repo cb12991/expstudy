@@ -368,13 +368,13 @@ tidyr::pivot_wider
 pivot_wider.tbl_es <- function(
   data,
   id_cols = NULL,
-  names_from = name,
+  names_from,
   names_prefix = "",
   names_sep = "_",
   names_glue = NULL,
   names_sort = FALSE,
   names_repair = "check_unique",
-  values_from = value,
+  values_from,
   values_fill = NULL,
   values_fn = NULL,
   ...
@@ -387,13 +387,13 @@ pivot_wider.tbl_es <- function(
       new = pivot_wider(
         out,
         id_cols = id_cols,
-        names_from = names_from,
+        names_from = {{ names_from }},
         names_prefix = names_prefix,
         names_sep = names_sep,
         names_glue = names_glue,
         names_sort = names_sort,
         names_repair = names_repair,
-        values_from = values_from,
+        values_from = {{ values_from }},
         values_fill = values_fill,
         values_fn = values_fn,
         ...
@@ -407,7 +407,7 @@ pivot_wider.tbl_es <- function(
 #' @export
 tidyr::replace_na
 #' @export
-replace_na.tbl_es <- function(data, replace = list()) {
+replace_na.tbl_es <- function(data, replace = list(), ...) {
   out <- data
   class(out) <- setdiff(class(data), 'tbl_es')
 
