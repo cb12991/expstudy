@@ -226,16 +226,13 @@ complete.tbl_es <- function(data, ..., fill = list()) {
   out <- data
   class(out) <- setdiff(class(data), 'tbl_es')
 
-  suppressWarnings(
-    expr = update_meta(
-      new = complete(
-        out,
-        ...,
-        fill = fill
-      ),
-      old = data
+  update_meta(
+    new = complete(
+      out,
+      ...,
+      fill = fill
     ),
-    classes = c('warnings', 'messages')
+    old = data
   )
 }
 
@@ -246,15 +243,12 @@ drop_na.tbl_es <- function(data, ...) {
   out <- data
   class(out) <- setdiff(class(data), 'tbl_es')
 
-  suppressWarnings(
-    expr = update_meta(
-      new = drop_na(
-        data = out,
-        ...
-      ),
-      old = data
+  update_meta(
+    new = drop_na(
+      data = out,
+      ...
     ),
-    classes = c('warnings', 'messages')
+    old = data
   )
 }
 
@@ -269,16 +263,13 @@ expand.tbl_es <- function(
   out <- data
   class(out) <- setdiff(class(data), 'tbl_es')
 
-  suppressWarnings(
-    expr = update_meta(
-      new = expand(
-        out,
-        ...,
-        .name_repair = .name_repair
-      ),
-      old = data
+  update_meta(
+    new = expand(
+      out,
+      ...,
+      .name_repair = .name_repair
     ),
-    classes = c('warnings', 'messages')
+    old = data
   )
 }
 
@@ -294,16 +285,13 @@ fill.tbl_es <- function(
   out <- data
   class(out) <- setdiff(class(data), 'tbl_es')
 
-  suppressWarnings(
-    expr = update_meta(
-      new = fill(
-        out,
-        ...,
-        .direction = .direction
-      ),
-      old = data
+  update_meta(
+    new = fill(
+      out,
+      ...,
+      .direction = .direction
     ),
-    classes = c('warnings', 'messages')
+    old = data
   )
 }
 
@@ -319,17 +307,14 @@ nest.tbl_es <- function(
   out <- .data
   class(out) <- setdiff(class(.data), 'tbl_es')
 
-  suppressWarnings(
-    expr = update_meta(
-      new = nest(
-        out,
-        ...,
-        .names_sep = .names_sep,
-        .key = .key
-      ),
-      old = .data
+  update_meta(
+    new = nest(
+      out,
+      ...,
+      .names_sep = .names_sep,
+      .key = .key
     ),
-    classes = c('warnings', 'messages')
+    old = .data
   )
 }
 
@@ -355,27 +340,24 @@ pivot_longer.tbl_es <- function(
   out <- data
   class(out) <- setdiff(class(data), 'tbl_es')
 
-  suppressWarnings(
-    expr = update_meta(
-        new = pivot_longer(
-          out,
-          {{ cols }},
-          names_to = names_to,
-          names_prefix = names_prefix,
-          names_sep = names_sep,
-          names_pattern = names_pattern,
-          names_ptypes = names_ptypes,
-          names_transform = names_transform,
-          names_repair = names_repair,
-          values_to = values_to,
-          values_drop_na = values_drop_na,
-          values_ptypes = values_ptypes,
-          values_transform = values_transform,
-          ...
-        ),
-        old = data
-      ),
-    classes = c('warnings', 'messages')
+  update_meta(
+    new = pivot_longer(
+      out,
+      {{ cols }},
+      names_to = names_to,
+      names_prefix = names_prefix,
+      names_sep = names_sep,
+      names_pattern = names_pattern,
+      names_ptypes = names_ptypes,
+      names_transform = names_transform,
+      names_repair = names_repair,
+      values_to = values_to,
+      values_drop_na = values_drop_na,
+      values_ptypes = values_ptypes,
+      values_transform = values_transform,
+      ...
+    ),
+    old = data
   )
 }
 
@@ -399,25 +381,22 @@ pivot_wider.tbl_es <- function(
   out <- data
   class(out) <- setdiff(class(data), 'tbl_es')
 
-  suppressWarnings(
-    expr = update_meta(
-      new = pivot_wider(
-        out,
-        id_cols = id_cols,
-        names_from = {{ names_from }},
-        names_prefix = names_prefix,
-        names_sep = names_sep,
-        names_glue = names_glue,
-        names_sort = names_sort,
-        names_repair = names_repair,
-        values_from = {{ values_from }},
-        values_fill = values_fill,
-        values_fn = values_fn,
-        ...
-      ),
-      old = data
+  update_meta(
+    new = pivot_wider(
+      out,
+      id_cols = id_cols,
+      names_from = {{ names_from }},
+      names_prefix = names_prefix,
+      names_sep = names_sep,
+      names_glue = names_glue,
+      names_sort = names_sort,
+      names_repair = names_repair,
+      values_from = {{ values_from }},
+      values_fill = values_fill,
+      values_fn = values_fn,
+      ...
     ),
-    classes = c('warnings', 'messages')
+    old = data
   )
 }
 
@@ -428,15 +407,12 @@ replace_na.tbl_es <- function(data, replace = list(), ...) {
   out <- data
   class(out) <- setdiff(class(data), 'tbl_es')
 
-  suppressWarnings(
-    expr = update_meta(
-      new = replace_na(
-        out,
-        replace = replace
-      ),
-      old = data
+  update_meta(
+    new = replace_na(
+      out,
+      replace = replace
     ),
-    classes = c('warnings', 'messages')
+    old = data
   )
 }
 
@@ -457,22 +433,18 @@ separate.tbl_es <- function(
   out <- data
   class(out) <- setdiff(class(data), 'tbl_es')
 
-  suppressWarnings(
-    expr =
-      update_meta(
-        new = separate(
-          data = out,
-          col = {{ col }},
-          into = {{ into }},
-          sep = sep,
-          remove = remove,
-          convert = convert,
-          extra = extra,
-          ...
-        ),
-        old = data
-      ),
-    classes = c('warnings', 'messages')
+  update_meta(
+    new = separate(
+      data = out,
+      col = {{ col }},
+      into = {{ into }},
+      sep = sep,
+      remove = remove,
+      convert = convert,
+      extra = extra,
+      ...
+    ),
+    old = data
   )
 }
 
