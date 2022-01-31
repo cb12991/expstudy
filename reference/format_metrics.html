@@ -64,6 +64,101 @@
     <p>the same <code>expstudy</code> with formatted metrics</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="va">es</span> <span class="op">&lt;-</span> <span class="fu"><a href="expstudy.html">expstudy</a></span><span class="op">(</span></span>
+<span class="r-in">    data <span class="op">=</span> <span class="va">mortexp</span>,</span>
+<span class="r-in">    actuals <span class="op">=</span> <span class="va">ACTUAL_DEATHS</span>,</span>
+<span class="r-in">    expecteds <span class="op">=</span> <span class="va">EXPECTED_DEATHS</span>,</span>
+<span class="r-in">    exposures <span class="op">=</span>  <span class="va">EXPOSURE</span>,</span>
+<span class="r-in">    variances <span class="op">=</span> <span class="va">VARIANCE_DEATHS</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="co"># Unformatted result:</span></span>
+<span class="r-in">  <span class="va">es</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="fu"><a href="aggregate.html">aggregate</a></span><span class="op">(</span></span>
+<span class="r-in">      <span class="va">GENDER</span>,</span>
+<span class="r-in">      <span class="va">UNDERWRITING_CLASS</span></span>
+<span class="r-in">    <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="va">add_proportions</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="va">add_metrics</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="va">add_credibility</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Source: </span>local data table [6 x 14]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Call:   </span>`_DT7`[, .(ACTUAL_DEATHS = sum(ACTUAL_DEATHS), EXPECTED_DEATHS = sum(EXPECTED_DEATHS), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     EXPOSURE = sum(EXPOSURE), VARIANCE_DEATHS = sum(VARIANCE_DEATHS)), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     keyby = .(GENDER, UNDERWRITING_CLASS)][, `:=`(PROP_ACTUAL_DEATHS = ACTUAL_DEATHS/sum(ACTUAL_DEATHS), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     PROP_EXPECTED_DEATHS = EXPECTED_DEATHS/sum(EXPECTED_DEATHS), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     PROP_EXPOSURE = EXPOSURE/sum(EXPOSURE), PROP_VARIANCE_DEATHS = VARIANCE_DEATHS/sum(VARIANCE_DEATHS))][, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     `:=`(ACTUAL_TO_EXPECTED = ACTUAL_DEATHS/EXPECTED_DEATHS, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ACTUAL_TO_EXPOSED = ACTUAL_DEATHS/EXPOSURE, EXPECTED_TO_EXPOSED = EXPECTED_DEATHS/EXPOSURE)][, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     `:=`(CREDIBILITY = pmin(1, 0.05 * EXPECTED_DEATHS/sqrt(1.95996398454005 * </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         VARIANCE_DEATHS)))]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   GENDER UNDERWRITING_CL… ACTUAL_DEATHS EXPECTED_DEATHS EXPOSURE VARIANCE_DEATHS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> FEMALE PREFERRED                   12            10.6     626.            10.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> FEMALE SELECT                      30            28.4    <span style="text-decoration: underline;">1</span>602.            28.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> FEMALE STANDARD                    92            68.2    <span style="text-decoration: underline;">3</span>870.            68.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> MALE   PREFERRED                   24            15.1     953.            15.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> MALE   SELECT                      50            34.6    <span style="text-decoration: underline;">1</span>932.            34.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> MALE   STANDARD                   141            95.2    <span style="text-decoration: underline;">5</span>281.            95.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 8 more variables: PROP_ACTUAL_DEATHS &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   PROP_EXPECTED_DEATHS &lt;dbl&gt;, PROP_EXPOSURE &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   PROP_VARIANCE_DEATHS &lt;dbl&gt;, ACTUAL_TO_EXPECTED &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ACTUAL_TO_EXPOSED &lt;dbl&gt;, EXPECTED_TO_EXPOSED &lt;dbl&gt;, CREDIBILITY &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># Use as.data.table()/as.data.frame()/as_tibble() to access results</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="co"># Formatted result:</span></span>
+<span class="r-in">  <span class="va">es</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="fu"><a href="aggregate.html">aggregate</a></span><span class="op">(</span></span>
+<span class="r-in">      <span class="va">GENDER</span>,</span>
+<span class="r-in">      <span class="va">UNDERWRITING_CLASS</span></span>
+<span class="r-in">    <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="va">add_proportions</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="va">add_metrics</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="va">add_credibility</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="va">format_metrics</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Source: </span>local data table [6 x 14]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Call:   </span>`_DT7`[, .(ACTUAL_DEATHS = sum(ACTUAL_DEATHS), EXPECTED_DEATHS = sum(EXPECTED_DEATHS), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     EXPOSURE = sum(EXPOSURE), VARIANCE_DEATHS = sum(VARIANCE_DEATHS)), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     keyby = .(GENDER, UNDERWRITING_CLASS)][, `:=`(PROP_ACTUAL_DEATHS = ACTUAL_DEATHS/sum(ACTUAL_DEATHS), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     PROP_EXPECTED_DEATHS = EXPECTED_DEATHS/sum(EXPECTED_DEATHS), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     PROP_EXPOSURE = EXPOSURE/sum(EXPOSURE), PROP_VARIANCE_DEATHS = VARIANCE_DEATHS/sum(VARIANCE_DEATHS))][, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     `:=`(ACTUAL_TO_EXPECTED = ACTUAL_DEATHS/EXPECTED_DEATHS, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ACTUAL_TO_EXPOSED = ACTUAL_DEATHS/EXPOSURE, EXPECTED_TO_EXPOSED = EXPECTED_DEATHS/EXPOSURE)][, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     `:=`(CREDIBILITY = pmin(1, 0.05 * EXPECTED_DEATHS/sqrt(1.95996398454005 * </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         VARIANCE_DEATHS)))][, `:=`(ACTUAL_TO_EXPOSED = formatC(ACTUAL_TO_EXPOSED, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), EXPECTED_TO_EXPOSED = formatC(EXPECTED_TO_EXPOSED, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), ACTUAL_DEATHS = formatC(ACTUAL_DEATHS, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), EXPECTED_DEATHS = formatC(EXPECTED_DEATHS, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), EXPOSURE = formatC(EXPOSURE, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), VARIANCE_DEATHS = formatC(VARIANCE_DEATHS, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), PROP_ACTUAL_DEATHS = paste0(round(PROP_ACTUAL_DEATHS * </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), PROP_EXPECTED_DEATHS = paste0(round(PROP_EXPECTED_DEATHS * </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), PROP_EXPOSURE = paste0(round(PROP_EXPOSURE * </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), PROP_VARIANCE_DEATHS = paste0(round(PROP_VARIANCE_DEATHS * </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), ACTUAL_TO_EXPECTED = paste0(round(ACTUAL_TO_EXPECTED * </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), CREDIBILITY = paste0(round(CREDIBILITY * 100, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     2), "%"))]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   GENDER UNDERWRITING_CL… ACTUAL_DEATHS EXPECTED_DEATHS EXPOSURE VARIANCE_DEATHS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> FEMALE PREFERRED        12.00         10.60           626.27   10.59          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> FEMALE SELECT           30.00         28.38           1,601.94 28.33          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> FEMALE STANDARD         92.00         68.20           3,869.80 68.08          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> MALE   PREFERRED        24.00         15.14           952.86   15.11          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> MALE   SELECT           50.00         34.57           1,932.45 34.51          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> MALE   STANDARD         141.00        95.23           5,280.98 95.05          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 8 more variables: PROP_ACTUAL_DEATHS &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   PROP_EXPECTED_DEATHS &lt;chr&gt;, PROP_EXPOSURE &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   PROP_VARIANCE_DEATHS &lt;chr&gt;, ACTUAL_TO_EXPECTED &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ACTUAL_TO_EXPOSED &lt;chr&gt;, EXPECTED_TO_EXPOSED &lt;chr&gt;, CREDIBILITY &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># Use as.data.table()/as.data.frame()/as_tibble() to access results</span></span>
+<span class="r-in"></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

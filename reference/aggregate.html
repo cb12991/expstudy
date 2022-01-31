@@ -89,11 +89,61 @@ variables can also be totaled by using the <code>.oth_sum_vars</code> to specify
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>an aggregated <code>expstudy</code>.</p>
     </div>
-    <div class="section level2">
-    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="expstudy.html">expstudy()</a></code> <a href="tbl_es-class.html">tbl_es</a></p></div>
-    </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="va">es</span> <span class="op">&lt;-</span> <span class="fu"><a href="expstudy.html">expstudy</a></span><span class="op">(</span></span>
+<span class="r-in">    data <span class="op">=</span> <span class="va">mortexp</span>,</span>
+<span class="r-in">    actuals <span class="op">=</span> <span class="va">ACTUAL_DEATHS</span>,</span>
+<span class="r-in">    expecteds <span class="op">=</span> <span class="va">EXPECTED_DEATHS</span>,</span>
+<span class="r-in">    exposures <span class="op">=</span>  <span class="va">EXPOSURE</span>,</span>
+<span class="r-in">    variances <span class="op">=</span> <span class="va">VARIANCE_DEATHS</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="va">es</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="fu">aggregate</span><span class="op">(</span><span class="va">ATTAINED_AGE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Source: </span>local data table [83 x 5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Call:   </span>`_DT4`[, .(ACTUAL_DEATHS = sum(ACTUAL_DEATHS), EXPECTED_DEATHS = sum(EXPECTED_DEATHS), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     EXPOSURE = sum(EXPOSURE), VARIANCE_DEATHS = sum(VARIANCE_DEATHS)), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     keyby = .(ATTAINED_AGE)]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ATTAINED_AGE ACTUAL_DEATHS EXPECTED_DEATHS EXPOSURE VARIANCE_DEATHS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>           19             0           0.214     21.7           0.214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>           20             0           0.565     56.5           0.565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>           21             0           0.662     65.5           0.661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>           22             0           0.713     69.9           0.712</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>           23             0           0.828     80.3           0.827</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>           24             0           0.884     84.9           0.884</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 77 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># Use as.data.table()/as.data.frame()/as_tibble() to access results</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="va">es</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">    <span class="fu">aggregate</span><span class="op">(</span></span>
+<span class="r-in">      <span class="va">GENDER</span>,</span>
+<span class="r-in">      <span class="va">UNDERWRITING_CLASS</span>,</span>
+<span class="r-in">      <span class="va">SMOKING_STATUS</span></span>
+<span class="r-in">    <span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Source: </span>local data table [12 x 7]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Call:   </span>`_DT4`[, .(ACTUAL_DEATHS = sum(ACTUAL_DEATHS), EXPECTED_DEATHS = sum(EXPECTED_DEATHS), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     EXPOSURE = sum(EXPOSURE), VARIANCE_DEATHS = sum(VARIANCE_DEATHS)), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     keyby = .(GENDER, UNDERWRITING_CLASS, SMOKING_STATUS)]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   GENDER UNDERWRITING_CLA… SMOKING_STATUS ACTUAL_DEATHS EXPECTED_DEATHS EXPOSURE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> FEMALE PREFERRED         NON-SMOKER                 9            7.74     455.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> FEMALE PREFERRED         SMOKER                     3            2.86     171.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> FEMALE SELECT            NON-SMOKER                22           20.7     <span style="text-decoration: underline;">1</span>149.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> FEMALE SELECT            SMOKER                     8            7.68     453.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> FEMALE STANDARD          NON-SMOKER                64           47.9     <span style="text-decoration: underline;">2</span>689.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> FEMALE STANDARD          SMOKER                    28           20.3     <span style="text-decoration: underline;">1</span>181.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 6 more rows, and 1 more variable: VARIANCE_DEATHS &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># Use as.data.table()/as.data.frame()/as_tibble() to access results</span></span>
+<span class="r-in"></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

@@ -96,6 +96,36 @@ data.table vignette:
     <p>an <code>expstudy</code></p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu">expstudy</span><span class="op">(</span></span>
+<span class="r-in">    data <span class="op">=</span> <span class="va">mortexp</span>,</span>
+<span class="r-in">    actuals <span class="op">=</span> <span class="va">ACTUAL_DEATHS</span>,</span>
+<span class="r-in">    expecteds <span class="op">=</span> <span class="va">EXPECTED_DEATHS</span>,</span>
+<span class="r-in">    exposures <span class="op">=</span>  <span class="va">EXPOSURE</span>,</span>
+<span class="r-in">    variances <span class="op">=</span> <span class="va">VARIANCE_DEATHS</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Source: </span>local data table [175,491 x 18]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Call:   </span>`_DT6`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   AS_OF_DATE POLICY_HOLDER GENDER SMOKING_STATUS UNDERWRITING_CLASS INSURED_DOB</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1998-04-30 PH_0001       MALE   NON-SMOKER     STANDARD           1948-09-10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1998-05-31 PH_0001       MALE   NON-SMOKER     STANDARD           1948-09-10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1998-06-30 PH_0001       MALE   NON-SMOKER     STANDARD           1948-09-10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1998-07-31 PH_0001       MALE   NON-SMOKER     STANDARD           1948-09-10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 1998-08-31 PH_0001       MALE   NON-SMOKER     STANDARD           1948-09-10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 1998-09-30 PH_0001       MALE   NON-SMOKER     STANDARD           1948-09-10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 175,485 more rows, and 12 more variables: ISSUE_DATE &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ISSUE_AGE &lt;dbl&gt;, ATTAINED_AGE &lt;dbl&gt;, DURATION_MONTH &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   DURATION_YEAR &lt;dbl&gt;, POLICY_STATUS &lt;fct&gt;, TERMINATION_DATE &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   EXPOSURE &lt;dbl&gt;, ACTUAL_DEATHS &lt;dbl&gt;, EXPECTED_MORTALITY_RT &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   EXPECTED_DEATHS &lt;dbl&gt;, VARIANCE_DEATHS &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># Use as.data.table()/as.data.frame()/as_tibble() to access results</span></span>
+<span class="r-in"></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

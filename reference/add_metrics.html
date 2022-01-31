@@ -107,6 +107,71 @@ be added</p></dd>
 additional detail on <code>expstudy</code> objects.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="va">es</span> <span class="op">&lt;-</span> <span class="fu"><a href="expstudy.html">expstudy</a></span><span class="op">(</span></span>
+<span class="r-in">    data <span class="op">=</span> <span class="va">mortexp</span>,</span>
+<span class="r-in">    actuals <span class="op">=</span> <span class="va">ACTUAL_DEATHS</span>,</span>
+<span class="r-in">    expecteds <span class="op">=</span> <span class="va">EXPECTED_DEATHS</span>,</span>
+<span class="r-in">    exposures <span class="op">=</span>  <span class="va">EXPOSURE</span>,</span>
+<span class="r-in">    variances <span class="op">=</span> <span class="va">VARIANCE_DEATHS</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in">  <span class="co"># If no arguments are provided, all default metrics will be generated. This</span></span>
+<span class="r-in">  <span class="co"># mostly makes sense for already aggregated expstudy objects, but can be used</span></span>
+<span class="r-in">  <span class="co"># with unaggregated objects as well.</span></span>
+<span class="r-in">   <span class="va">es</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">     <span class="fu"><a href="aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">ATTAINED_AGE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">     <span class="va">add_metrics</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Source: </span>local data table [83 x 8]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Call:   </span>`_DT2`[, .(ACTUAL_DEATHS = sum(ACTUAL_DEATHS), EXPECTED_DEATHS = sum(EXPECTED_DEATHS), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     EXPOSURE = sum(EXPOSURE), VARIANCE_DEATHS = sum(VARIANCE_DEATHS)), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     keyby = .(ATTAINED_AGE)][, `:=`(ACTUAL_TO_EXPECTED = ACTUAL_DEATHS/EXPECTED_DEATHS, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ACTUAL_TO_EXPOSED = ACTUAL_DEATHS/EXPOSURE, EXPECTED_TO_EXPOSED = EXPECTED_DEATHS/EXPOSURE)]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ATTAINED_AGE ACTUAL_DEATHS EXPECTED_DEATHS EXPOSURE VARIANCE_DEATHS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>           19             0           0.214     21.7           0.214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>           20             0           0.565     56.5           0.565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>           21             0           0.662     65.5           0.661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>           22             0           0.713     69.9           0.712</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>           23             0           0.828     80.3           0.827</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>           24             0           0.884     84.9           0.884</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 77 more rows, and 3 more variables: ACTUAL_TO_EXPECTED &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ACTUAL_TO_EXPOSED &lt;dbl&gt;, EXPECTED_TO_EXPOSED &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># Use as.data.table()/as.data.frame()/as_tibble() to access results</span></span>
+<span class="r-in"></span>
+<span class="r-in">   <span class="va">es</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">     <span class="fu"><a href="aggregate.html">aggregate</a></span><span class="op">(</span></span>
+<span class="r-in">       <span class="va">UNDERWRITING_CLASS</span>,</span>
+<span class="r-in">       <span class="va">GENDER</span>,</span>
+<span class="r-in">       <span class="va">SMOKING_STATUS</span></span>
+<span class="r-in">     <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">     <span class="va">add_metrics</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Source: </span>local data table [12 x 10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Call:   </span>`_DT2`[, .(ACTUAL_DEATHS = sum(ACTUAL_DEATHS), EXPECTED_DEATHS = sum(EXPECTED_DEATHS), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     EXPOSURE = sum(EXPOSURE), VARIANCE_DEATHS = sum(VARIANCE_DEATHS)), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     keyby = .(UNDERWRITING_CLASS, GENDER, SMOKING_STATUS)][, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     `:=`(ACTUAL_TO_EXPECTED = ACTUAL_DEATHS/EXPECTED_DEATHS, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ACTUAL_TO_EXPOSED = ACTUAL_DEATHS/EXPOSURE, EXPECTED_TO_EXPOSED = EXPECTED_DEATHS/EXPOSURE)]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   UNDERWRITING_CLA… GENDER SMOKING_STATUS ACTUAL_DEATHS EXPECTED_DEATHS EXPOSURE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> PREFERRED         FEMALE NON-SMOKER                 9            7.74     455.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> PREFERRED         FEMALE SMOKER                     3            2.86     171.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> PREFERRED         MALE   NON-SMOKER                17           10.7      679.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> PREFERRED         MALE   SMOKER                     7            4.48     274.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> SELECT            FEMALE NON-SMOKER                22           20.7     <span style="text-decoration: underline;">1</span>149.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> SELECT            FEMALE SMOKER                     8            7.68     453.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 6 more rows, and 4 more variables: VARIANCE_DEATHS &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ACTUAL_TO_EXPECTED &lt;dbl&gt;, ACTUAL_TO_EXPOSED &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   EXPECTED_TO_EXPOSED &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># Use as.data.table()/as.data.frame()/as_tibble() to access results</span></span>
+<span class="r-in"></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
