@@ -8,6 +8,36 @@
 #' @return
 #'   the same `expstudy` with formatted metrics
 #'
+#' @examples
+#'   es <- expstudy(
+#'     data = mortexp,
+#'     actuals = ACTUAL_DEATHS,
+#'     expecteds = EXPECTED_DEATHS,
+#'     exposures =  EXPOSURE,
+#'     variances = VARIANCE_DEATHS
+#'   )
+#'
+#'   # Unformatted result:
+#'   es %>%
+#'     aggregate(
+#'       GENDER,
+#'       UNDERWRITING_CLASS
+#'     ) %>%
+#'     add_proportions %>%
+#'     add_metrics %>%
+#'     add_credibility
+#'
+#'   # Formatted result:
+#'   es %>%
+#'     aggregate(
+#'       GENDER,
+#'       UNDERWRITING_CLASS
+#'     ) %>%
+#'     add_proportions %>%
+#'     add_metrics %>%
+#'     add_credibility %>%
+#'     format_metrics
+#'
 #' @export
 format_metrics <- function(expstudy) {
   assert_that(inherits(expstudy, 'tbl_es'))
@@ -42,14 +72,14 @@ format_metrics <- function(expstudy) {
   expstudy %>%
     mutate(
       across(
-        .cols = all_of(numeric_vars),
+        .cols = all_of(!!numeric_vars),
         .fns = formatC,
         format = 'f',
         big.mark = ',',
         digits = 2
       ),
       across(
-        .cols = all_of(percent_vars),
+        .cols = all_of(!!percent_vars),
         .fns = ~ paste0(round(.x * 100, 2), '%')
       )
     )

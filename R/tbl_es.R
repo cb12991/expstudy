@@ -36,4 +36,5 @@ setOldClass('tbl_es', 'dtplyr_step')
 #'
 #' @name tbl_es-class
 #' @aliases tbl_es tbl_es-class
+#' @seealso [dtplyr::lazy_dt]
 NULL

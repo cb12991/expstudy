@@ -42,3 +42,28 @@ metrics are available by default and use the \code{expstudy}'s metric variables
 You can also create custom metrics to add by providing (optionally named)
 metric formulae.
 }
+\examples{
+  es <- expstudy(
+    data = mortexp,
+    actuals = ACTUAL_DEATHS,
+    expecteds = EXPECTED_DEATHS,
+    exposures =  EXPOSURE,
+    variances = VARIANCE_DEATHS
+  )
+
+  # If no arguments are provided, all default metrics will be generated. This
+  # mostly makes sense for already aggregated expstudy objects, but can be used
+  # with unaggregated objects as well.
+   es \%>\%
+     aggregate(ATTAINED_AGE) \%>\%
+     add_metrics
+
+   es \%>\%
+     aggregate(
+       UNDERWRITING_CLASS,
+       GENDER,
+       SMOKING_STATUS
+     ) \%>\%
+     add_metrics
+
+}

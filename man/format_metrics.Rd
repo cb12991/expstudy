@@ -15,3 +15,34 @@ the same \code{expstudy} with formatted metrics
 \description{
 Easily format metrics and metric variables for better readability.
 }
+\examples{
+  es <- expstudy(
+    data = mortexp,
+    actuals = ACTUAL_DEATHS,
+    expecteds = EXPECTED_DEATHS,
+    exposures =  EXPOSURE,
+    variances = VARIANCE_DEATHS
+  )
+
+  # Unformatted result:
+  es \%>\%
+    aggregate(
+      GENDER,
+      UNDERWRITING_CLASS
+    ) \%>\%
+    add_proportions \%>\%
+    add_metrics \%>\%
+    add_credibility
+
+  # Formatted result:
+  es \%>\%
+    aggregate(
+      GENDER,
+      UNDERWRITING_CLASS
+    ) \%>\%
+    add_proportions \%>\%
+    add_metrics \%>\%
+    add_credibility \%>\%
+    format_metrics
+
+}

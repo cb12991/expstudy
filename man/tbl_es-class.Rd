@@ -42,3 +42,6 @@ retaining the attributes listed above. This saves time in routine, repetitive
 coding, leading to increased time for analysis.
 }
 
+\seealso{
+\link[dtplyr:lazy_dt]{dtplyr::lazy_dt}
+}

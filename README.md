@@ -45,18 +45,32 @@ library(expstudy)
 #>     intersect, setdiff, union
 ```
 
-First you need a dataset that can be used for an experience study:
+First you need a dataset that can be used for an experience study. This
+package provides a sample mortality experience study to aid with
+examples:
 
 ``` r
-dataset <- data.frame(
-  GENDER = sample(c('MALE','FEMALE'), size = 10000, replace = TRUE),
-  ATTAINED_AGE = sample(
-    c('Under 40', '40 to 65', '65+'), size = 10000, replace = TRUE
-  ),
-  RECORD_YEARSPAN = runif(10000, max = 5),
-  EXPECTED_DEATHS = runif(10000, max = 5),
-  ACTUAL_DEATHS = runif(10000, max = 5)
-)
+glimpse(mortexp)
+#> Rows: 175,491
+#> Columns: 18
+#> $ AS_OF_DATE            <date> 1998-04-30, 1998-05-31, 1998-06-30, 1998-07-31,~
+#> $ POLICY_HOLDER         <fct> PH_0001, PH_0001, PH_0001, PH_0001, PH_0001, PH_~
+#> $ GENDER                <fct> MALE, MALE, MALE, MALE, MALE, MALE, MALE, MALE, ~
+#> $ SMOKING_STATUS        <fct> NON-SMOKER, NON-SMOKER, NON-SMOKER, NON-SMOKER, ~
+#> $ UNDERWRITING_CLASS    <fct> STANDARD, STANDARD, STANDARD, STANDARD, STANDARD~
+#> $ INSURED_DOB           <date> 1948-09-10, 1948-09-10, 1948-09-10, 1948-09-10,~
+#> $ ISSUE_DATE            <date> 1998-04-12, 1998-04-12, 1998-04-12, 1998-04-12,~
+#> $ ISSUE_AGE             <dbl> 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, ~
+#> $ ATTAINED_AGE          <dbl> 50, 50, 50, 50, 50, 51, 51, 51, 51, 51, 51, 51, ~
+#> $ DURATION_MONTH        <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1~
+#> $ DURATION_YEAR         <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, ~
+#> $ POLICY_STATUS         <fct> DEATH, DEATH, DEATH, DEATH, DEATH, DEATH, DEATH,~
+#> $ TERMINATION_DATE      <date> 2012-04-13, 2012-04-13, 2012-04-13, 2012-04-13,~
+#> $ EXPOSURE              <dbl> 0.04931507, 0.08219178, 0.07945205, 0.08219178, ~
+#> $ ACTUAL_DEATHS         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
+#> $ EXPECTED_MORTALITY_RT <dbl> 0.01428571, 0.01428571, 0.01428571, 0.01428571, ~
+#> $ EXPECTED_DEATHS       <dbl> 0.000704501, 0.001174168, 0.001135029, 0.0011741~
+#> $ VARIANCE_DEATHS       <dbl> 0.0007040047, 0.0011727896, 0.0011337411, 0.0011~
 ```
 
 Now you can convert to an `expstudy` object:
@@ -67,10 +81,11 @@ Now you can convert to an `expstudy` object:
 # required. 
 
 es <- expstudy(
-  data = dataset,
+  data = mortexp,
   actuals = ACTUAL_DEATHS,
   expecteds = EXPECTED_DEATHS,
-  exposures = RECORD_YEARSPAN
+  exposures = EXPOSURE,
+  variances = VARIANCE_DEATHS
 )
 ```
 
@@ -94,73 +109,41 @@ were provided, `coompile_results()` will generate a nested list of
 summaries:
 
 ``` r
-glimpse(results)
+glimpse(results, give.attr = FALSE)
 #> List of 2
 #>  $ UNFORMATTED:List of 2
 #>   ..$ METRICS    :List of 4
-#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
+#>   .. ..$ AGGREGATE                 : tbl_es [1 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY GENDER                 : tbl_es [2 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY ATTAINED_AGE           : tbl_es [83 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [166 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   ..$ PROPORTIONS:List of 4
-#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
+#>   .. ..$ AGGREGATE                 : tbl_es [1 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY GENDER                 : tbl_es [2 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY ATTAINED_AGE           : tbl_es [83 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [166 x 10] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>  $ FORMATTED  :List of 2
 #>   ..$ METRICS    :List of 4
-#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
+#>   .. ..$ AGGREGATE                 : tbl_es [1 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY GENDER                 : tbl_es [2 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY ATTAINED_AGE           : tbl_es [83 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [166 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)
 #>   ..$ PROPORTIONS:List of 4
-#>   .. ..$ AGGREGATE                 : tbl_es [1 x 6] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER                 : tbl_es [2 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY ATTAINED_AGE           : tbl_es [3 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
-#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [6 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
-#>   .. .. ..- attr(*, "metric_vars")=List of 3
-#>   .. .. ..- attr(*, "metrics_applied")=List of 2
+#>   .. ..$ AGGREGATE                 : tbl_es [1 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY GENDER                 : tbl_es [2 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY ATTAINED_AGE           : tbl_es [83 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)
+#>   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [166 x 10] (S3: tbl_es/tbl_df/tbl/data.frame)
 ```
 
 An unformatted summary can be used for subsequent analysis…
 
 ``` r
 results$UNFORMATTED$METRICS$`BY GENDER`
-#> # A tibble: 2 x 7
-#>   GENDER ACTUAL_DEATHS EXPECTED_DEATHS RECORD_YEARSPAN ACTUAL_TO_EXPECTED
-#> * <chr>          <dbl>           <dbl>           <dbl>              <dbl>
-#> 1 FEMALE        12520.          12450.          12663.              1.01 
-#> 2 MALE          12222.          12251.          12325.              0.998
+#> # A tibble: 2 x 8
+#>   GENDER ACTUAL_DEATHS EXPECTED_DEATHS EXPOSURE VARIANCE_DEATHS ACTUAL_TO_EXPEC~
+#> * <fct>          <dbl>           <dbl>    <dbl>           <dbl>            <dbl>
+#> 1 FEMALE           134            107.    6098.            107.             1.25
+#> 2 MALE             215            145.    8166.            145.             1.48
 #> # ... with 2 more variables: ACTUAL_TO_EXPOSED <dbl>, EXPECTED_TO_EXPOSED <dbl>
 ```
 
@@ -169,14 +152,21 @@ report to distribute nicely.
 
 ``` r
 results$FORMATTED$PROPORTIONS$`BY ATTAINED_AGE`
-#> # A tibble: 3 x 7
-#>   ATTAINED_AGE ACTUAL_DEATHS EXPECTED_DEATHS RECORD_YEARSPAN PROP_ACTUAL_DEATHS
-#> * <chr>        <chr>         <chr>           <chr>           <chr>             
-#> 1 40 to 65     8,028.04      8,021.21        8,249.02        32.45%            
-#> 2 65+          8,441.62      8,386.76        8,380.57        34.12%            
-#> 3 Under 40     8,272.31      8,293.46        8,358.14        33.43%            
-#> # ... with 2 more variables: PROP_EXPECTED_DEATHS <chr>,
-#> #   PROP_RECORD_YEARSPAN <chr>
+#> # A tibble: 83 x 9
+#>    ATTAINED_AGE ACTUAL_DEATHS EXPECTED_DEATHS EXPOSURE VARIANCE_DEATHS
+#>  *        <dbl> <chr>         <chr>           <chr>    <chr>          
+#>  1           19 0.00          0.21            21.66    0.21           
+#>  2           20 0.00          0.57            56.52    0.56           
+#>  3           21 0.00          0.66            65.52    0.66           
+#>  4           22 0.00          0.71            69.88    0.71           
+#>  5           23 0.00          0.83            80.32    0.83           
+#>  6           24 0.00          0.88            84.89    0.88           
+#>  7           25 0.00          0.98            93.39    0.98           
+#>  8           26 0.00          1.07            100.19   1.06           
+#>  9           27 2.00          1.20            111.25   1.20           
+#> 10           28 0.00          1.30            119.39   1.30           
+#> # ... with 73 more rows, and 4 more variables: PROP_ACTUAL_DEATHS <chr>,
+#> #   PROP_EXPECTED_DEATHS <chr>, PROP_EXPOSURE <chr>, PROP_VARIANCE_DEATHS <chr>
 ```
 
 You can review and trim the summaries down to what you want without much

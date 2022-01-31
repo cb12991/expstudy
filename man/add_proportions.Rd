@@ -22,8 +22,41 @@ An \code{expstudy} with added proportions.
 }
 \description{
 Add proportions of \code{expstudy} metric variables. Other variables can be
-provided via the <\code{\link[rlang:dyn-dots]{dynamic-dots}}> argument if proportions
-are wanted as well. Proportions will sum to 100\% per group if \code{.base_grp_nms}
-are provided. If \code{.base_grp_nms} are omitted, proportions will sum to 100\%
-in total.
+provided via the <\code{\link[rlang:dyn-dots]{dynamic-dots}}> argument. Proportions
+will sum to 100\% per group if \code{.base_grp_nms} are provided. If
+\code{.base_grp_nms} are omitted, proportions will sum to 100\% in total.
+}
+\examples{
+  es <- expstudy(
+    data = mortexp,
+    actuals = ACTUAL_DEATHS,
+    expecteds = EXPECTED_DEATHS,
+    exposures =  EXPOSURE,
+    variances = VARIANCE_DEATHS
+  )
+
+  # If no arguments are provided, proportions will be generated for expstudy
+  # metric variables only. This mostly makes sense for already aggregated
+  # expstudy objects, but can be used with unaggregated objects as well.
+  es \%>\%
+    aggregate(
+      ATTAINED_AGE
+    ) \%>\%
+    add_proportions
+
+  # For grouped proportions, use `.base_grp_nms` to identify which variable
+  # to use as the base for proportions.
+  es \%>\%
+    aggregate(
+      GENDER,
+      SMOKING_STATUS
+    ) \%>\%
+    add_proportions(
+      .base_grp_nms = 'GENDER'
+    )
+
+  # `.min_ungrpd` is useful only when generating multiple combinations of
+  # results with compile_results(); this prevents proportions all equaling
+  # 100\% when all grouping columns are used.
+
 }

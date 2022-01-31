@@ -11,7 +11,7 @@
 #' using the function arguments `.cred_k` and `.cred_p`, respectively.
 #'
 #' @param expstudy
-#'   an [expstudy()]
+#'   an [`expstudy`][expstudy()]
 #' @param .cred_k
 #'   number within range (0, 1); range parameter of credibility equation
 #' @param .cred_p
@@ -23,6 +23,27 @@
 #' @return
 #'   An `expstudy` with added credibility factors.
 #'
+#' @examples
+#'   es <- expstudy(
+#'     data = mortexp,
+#'     actuals = ACTUAL_DEATHS,
+#'     expecteds = EXPECTED_DEATHS,
+#'     exposures =  EXPOSURE,
+#'     variances = VARIANCE_DEATHS
+#'   )
+#'
+#'    es %>%
+#'      aggregate(ATTAINED_AGE) %>%
+#'      add_credibility
+#'
+#'    es %>%
+#'      aggregate(
+#'        UNDERWRITING_CLASS,
+#'        GENDER,
+#'        SMOKING_STATUS
+#'      ) %>%
+#'      add_credibility
+#'
 #' @export
 add_credibility <- function(
   expstudy,
@@ -32,7 +53,7 @@ add_credibility <- function(
 ) {
   assert_that(inherits(expstudy, 'tbl_es'))
 
-  exp_cols <- attr(expstudy, 'metric_vars')[['expected']]
+  exp_cols <- attr(expstudy, 'metric_vars')[['expecteds']]
   var_cols <- attr(expstudy, 'metric_vars')[['variances']]
 
   if (is.null(var_cols)) {
@@ -70,7 +91,7 @@ add_credibility <- function(
   metrics_applied <- metrics_applied %>%
     list_merge(
       name = .cred_nms,
-      format = 'percent'
+      format = rep('percent', length(.cred_nms))
     )
 
   cred_cols <- map2(
@@ -82,9 +103,9 @@ add_credibility <- function(
         .x,
         '/', 'sqrt({stats::qnorm((1 + .cred_p) / 2)} * ',
         .y,
-        ')'
+        '))'
       ),
-      env = as_environment(result)
+      env = as_environment(expstudy)
     )
   ) %>%
     structure(
@@ -92,5 +113,10 @@ add_credibility <- function(
       class = c('quosures', 'list')
     )
 
-  expstudy %>% mutate(!!!cred_cols)
+  return(
+    structure(
+      .Data = expstudy %>% mutate(!!!cred_cols),
+      metrics_applied = metrics_applied
+    )
+  )
 }

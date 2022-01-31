@@ -12,7 +12,7 @@ add_credibility(
 )
 }
 \arguments{
-\item{expstudy}{an \code{\link[=expstudy]{expstudy()}}}
+\item{expstudy}{an \code{\link[=expstudy]{expstudy}}}
 
 \item{.cred_k}{number within range (0, 1); range parameter of credibility equation}
 
@@ -33,4 +33,26 @@ of \code{expecteds} with probability \eqn{p}.
 
 Credibility range parameter \eqn{k} and probability level \eqn{p} are set
 using the function arguments \code{.cred_k} and \code{.cred_p}, respectively.
+}
+\examples{
+  es <- expstudy(
+    data = mortexp,
+    actuals = ACTUAL_DEATHS,
+    expecteds = EXPECTED_DEATHS,
+    exposures =  EXPOSURE,
+    variances = VARIANCE_DEATHS
+  )
+
+   es \%>\%
+     aggregate(ATTAINED_AGE) \%>\%
+     add_credibility
+
+   es \%>\%
+     aggregate(
+       UNDERWRITING_CLASS,
+       GENDER,
+       SMOKING_STATUS
+     ) \%>\%
+     add_credibility
+
 }

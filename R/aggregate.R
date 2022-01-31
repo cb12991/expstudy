@@ -23,7 +23,24 @@
 #' @return
 #'   an aggregated `expstudy`.
 #'
-#' @seealso [expstudy()] [tbl_es]
+#' @examples
+#'   es <- expstudy(
+#'     data = mortexp,
+#'     actuals = ACTUAL_DEATHS,
+#'     expecteds = EXPECTED_DEATHS,
+#'     exposures =  EXPOSURE,
+#'     variances = VARIANCE_DEATHS
+#'   )
+#'
+#'   es %>%
+#'     aggregate(ATTAINED_AGE)
+#'
+#'   es %>%
+#'     aggregate(
+#'       GENDER,
+#'       UNDERWRITING_CLASS,
+#'       SMOKING_STATUS
+#'     )
 #'
 #' @export
 aggregate <- function(

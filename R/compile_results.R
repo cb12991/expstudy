@@ -38,7 +38,26 @@
 #'   passed to the function.
 #'
 #' @seealso
-#'   [aggregate()] [add_metrics()] [add_proportions()] [format_metrics()]
+#'   [aggregate()] [add_metrics()] [add_credibility()] [add_proportions()]
+#'   [format_metrics()]
+#'
+#' @examples
+#'   es <- expstudy(
+#'     data = mortexp,
+#'     actuals = ACTUAL_DEATHS,
+#'     expecteds = EXPECTED_DEATHS,
+#'     exposures =  EXPOSURE,
+#'     variances = VARIANCE_DEATHS
+#'   )
+#'
+#'   # Quickly generate multiple analyses by simply declaring variables of
+#'   # interest within an experience study.
+#'   es %>%
+#'     compile_results(
+#'       GENDER,
+#'       SMOKING_STATUS,
+#'       UNDERWRITING_CLASS
+#'     )
 #'
 #' @export
 compile_results <- function(

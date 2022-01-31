@@ -32,6 +32,15 @@
 #'   [data.table] vignette:
 #'   `vignette('datatable-keys-fast-subset', package = 'data.table')`.
 #'
+#' @examples
+#'   expstudy(
+#'     data = mortexp,
+#'     actuals = ACTUAL_DEATHS,
+#'     expecteds = EXPECTED_DEATHS,
+#'     exposures =  EXPOSURE,
+#'     variances = VARIANCE_DEATHS
+#'   )
+#'
 #' @return
 #'   an `expstudy`
 #'
@@ -103,4 +112,16 @@ expstudy <- function(
       metrics_applied = list(name = character(0), format = character(0))
     )
   )
+}
+
+#' Test if the object is an expstudy
+#'
+#' This function returns `TRUE` for expstudies or subclasses thereof,
+#' and `FALSE` for all other objects.
+#'
+#' @param x An object
+#' @return `TRUE` if the object inherits from the `tbl_es` class.
+#' @export
+is_expstudy <- function(x) {
+  inherits(x, "tbl_es")
 }

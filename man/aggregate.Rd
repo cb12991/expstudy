@@ -29,6 +29,23 @@ be returned.
 By default, only the metric variables are summed and returned. Other
 variables can also be totaled by using the \code{.oth_sum_vars} to specify.
 }
-\seealso{
-\code{\link[=expstudy]{expstudy()}} \link{tbl_es}
+\examples{
+  es <- expstudy(
+    data = mortexp,
+    actuals = ACTUAL_DEATHS,
+    expecteds = EXPECTED_DEATHS,
+    exposures =  EXPOSURE,
+    variances = VARIANCE_DEATHS
+  )
+
+  es \%>\%
+    aggregate(ATTAINED_AGE)
+
+  es \%>\%
+    aggregate(
+      GENDER,
+      UNDERWRITING_CLASS,
+      SMOKING_STATUS
+    )
+
 }

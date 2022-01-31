@@ -41,3 +41,13 @@ stores attributes relating to an experience study.These attributes provide
 other package functions arguments which reduce time needed to review an
 assumption.
 }
+\examples{
+  expstudy(
+    data = mortexp,
+    actuals = ACTUAL_DEATHS,
+    expecteds = EXPECTED_DEATHS,
+    exposures =  EXPOSURE,
+    variances = VARIANCE_DEATHS
+  )
+
+}

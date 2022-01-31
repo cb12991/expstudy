@@ -49,6 +49,26 @@ This function was meant to provide quick results for routine analysis. Any
 additional in-depth analyses should make use of individual \code{expstudy}
 functions instead.
 }
+\examples{
+  es <- expstudy(
+    data = mortexp,
+    actuals = ACTUAL_DEATHS,
+    expecteds = EXPECTED_DEATHS,
+    exposures =  EXPOSURE,
+    variances = VARIANCE_DEATHS
+  )
+
+  # Quickly generate multiple analyses by simply declaring variables of
+  # interest within an experience study.
+  es \%>\%
+    compile_results(
+      GENDER,
+      SMOKING_STATUS,
+      UNDERWRITING_CLASS
+    )
+
+}
 \seealso{
-\code{\link[=aggregate]{aggregate()}} \code{\link[=add_metrics]{add_metrics()}} \code{\link[=add_proportions]{add_proportions()}} \code{\link[=format_metrics]{format_metrics()}}
+\code{\link[=aggregate]{aggregate()}} \code{\link[=add_metrics]{add_metrics()}} \code{\link[=add_credibility]{add_credibility()}} \code{\link[=add_proportions]{add_proportions()}}
+\code{\link[=format_metrics]{format_metrics()}}
 }

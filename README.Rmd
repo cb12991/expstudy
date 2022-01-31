@@ -41,18 +41,10 @@ devtools::install_github('cb12991/expstudy')
 library(expstudy)
 ```
 
-First you need a dataset that can be used for an experience study:
+First you need a dataset that can be used for an experience study. This package provides a sample mortality experience study to aid with examples:
 
 ```{r}
-dataset <- data.frame(
-  GENDER = sample(c('MALE','FEMALE'), size = 10000, replace = TRUE),
-  ATTAINED_AGE = sample(
-    c('Under 40', '40 to 65', '65+'), size = 10000, replace = TRUE
-  ),
-  RECORD_YEARSPAN = runif(10000, max = 5),
-  EXPECTED_DEATHS = runif(10000, max = 5),
-  ACTUAL_DEATHS = runif(10000, max = 5)
-)
+glimpse(mortexp)
 ```
 
 Now you can convert to an `expstudy` object:
@@ -63,10 +55,11 @@ Now you can convert to an `expstudy` object:
 # required. 
 
 es <- expstudy(
-  data = dataset,
+  data = mortexp,
   actuals = ACTUAL_DEATHS,
   expecteds = EXPECTED_DEATHS,
-  exposures = RECORD_YEARSPAN
+  exposures = EXPOSURE,
+  variances = VARIANCE_DEATHS
 )
 ```
 
@@ -86,7 +79,7 @@ results <- compile_results(
 The `compile_results()` function combines many `expstudy` functions to produce many summaries. Since nothing other than the potential groupings were provided, `coompile_results()` will generate a nested list of summaries:
 
 ```{r}
-glimpse(results)
+glimpse(results, give.attr = FALSE)
 ```
 
 An unformatted summary can be used for subsequent analysis...

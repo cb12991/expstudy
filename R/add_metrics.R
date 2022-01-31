@@ -29,6 +29,30 @@
 #'    An `expstudy` object with added metrics. See [expstudy()] for
 #'    additional detail on `expstudy` objects.
 #'
+#' @examples
+#'   es <- expstudy(
+#'     data = mortexp,
+#'     actuals = ACTUAL_DEATHS,
+#'     expecteds = EXPECTED_DEATHS,
+#'     exposures =  EXPOSURE,
+#'     variances = VARIANCE_DEATHS
+#'   )
+#'
+#'   # If no arguments are provided, all default metrics will be generated. This
+#'   # mostly makes sense for already aggregated expstudy objects, but can be used
+#'   # with unaggregated objects as well.
+#'    es %>%
+#'      aggregate(ATTAINED_AGE) %>%
+#'      add_metrics
+#'
+#'    es %>%
+#'      aggregate(
+#'        UNDERWRITING_CLASS,
+#'        GENDER,
+#'        SMOKING_STATUS
+#'      ) %>%
+#'      add_metrics
+#'
 #' @export
 add_metrics <- function(
   expstudy,
@@ -170,5 +194,10 @@ add_metrics <- function(
         )
     )
   }
-  expstudy %>% mutate(!!!oth_metrics, !!!metric_cols)
+  return(
+    structure(
+      .Data = expstudy %>% mutate(!!!oth_metrics, !!!metric_cols),
+      metrics_applied = metrics_applied
+    )
+  )
 }

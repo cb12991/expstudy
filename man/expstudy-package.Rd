@@ -5,7 +5,7 @@
 \alias{expstudy-package}
 \title{expstudy: experience study tools for analytics and communication}
 \description{
-A set of tools to help aid in the formation and analyses of recurring or novel experience studies.
+Provides a data class of 'tbl_es' to help aid in the formation and analyses of recurrent or novel experience studies. A 'tbl_es' has attributes which identify the key variables used for calculating metrics under an actuarial perspective. Common metrics (such as actual-to-expected analysis) can be quickly generated in aggregate or according to different qualitative factors. If multiple factors are of interest, grouped metrics can be automatically computed for each factor individually as well as for all possible combinations. All resulting output can then be formatted for presentations or left unformatted for subsequent analyses. Ultimately, this package aims to reduce time spent completing repetitive code therefore increasing time for analysis and insight.
 }
 \details{
 The \code{expstudy} package provides an subclass, \link{tbl_es}, for

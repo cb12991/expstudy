@@ -1,7 +1,6 @@
 
-# Passing an `expstudy` through a method often causes the attributes to be
-# dropped. This is a helper function that retains original attributes.
-#
+# Passing an expstudy through a method often causes the attributes to be
+# dropped. This is a helper function that retains original tbl_es  attributes.
 update_meta <- function(new, old) {
   return(
     structure(
@@ -272,7 +271,6 @@ expand.tbl_es <- function(
     old = data
   )
 }
-
 
 #' @export
 tidyr::fill
