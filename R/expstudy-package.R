@@ -79,6 +79,7 @@
 #' @importFrom rlang as_string
 #' @importFrom rlang call_modify
 #' @importFrom rlang call2
+#' @importFrom rlang .data
 #' @importFrom rlang ensyms
 #' @importFrom rlang exec
 #' @importFrom rlang is_empty
