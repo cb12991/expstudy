@@ -21,7 +21,6 @@ BugReports: https://github.com/cb12991/expstudy/issues
 Imports: 
     assertthat (>= 0.2.1),
     checkmate,
-    cli (>= 3.1.0),
     data.table (>= 1.14.2),
     dplyr (>= 1.0.7),
     dtplyr (>= 1.2.0),
@@ -36,8 +35,7 @@ Imports:
     tibble (>= 3.1.6),
     tidyr (>= 1.1.4),
     tidyselect (>= 1.1.1),
-    utils,
-    withr (>= 2.4.3)
+    utils
 Suggests: 
     covr (>= 3.5.1),
     roxygen2 (>= 7.1.2),
