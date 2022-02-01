@@ -101,7 +101,37 @@
 #' @md
 #' @name tidyeval
 #' @keywords internal
-#' @importFrom rlang enquo enquos .data := as_name as_label
 #' @aliases enquo enquos .data := as_name as_label
 #' @export enquo enquos .data := as_name as_label
 NULL
+
+#' Pipe operator
+#'
+#' See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @export
+#' @usage lhs \%>\% rhs
+#' @param lhs A value or the magrittr placeholder.
+#' @param rhs A function call using the magrittr semantics.
+#' @return The result of calling `rhs(lhs)`.
+NULL
+
+# testthat helpers -------------------------------------------------------------
+
+# Check attribute preservation after calling a method.
+attr_preserved <- function(x, f, ...) {
+  x_meta <- attributes(x)[c('metric_variables', 'metrics_applied')]
+
+  y <- do.call(f, list2(x, ...))
+  y_meta <- attributes(y)[c('metric_variables', 'metrics_applied')]
+
+  expect_equal(x_meta, y_meta)
+}
+
+# Check class preservation after calling a method.
+class_preserved <- function(x, f, ...) {
+  expect_s3_class(do.call(f, list2(x, ...)), class = 'tbl_es')
+}
