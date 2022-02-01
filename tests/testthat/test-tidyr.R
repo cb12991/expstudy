@@ -2,7 +2,7 @@ test_that('complete method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, complete, .data$ATTAINED_AGE)
+    !!!list(es, complete, es$ATTAINED_AGE)
   )
 })
 
@@ -18,7 +18,7 @@ test_that('expand method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, expand, .data$GENDER, .data$UNDERWRITING_CLASS)
+    !!!list(es, expand, es$GENDER, es$UNDERWRITING_CLASS)
   )
 })
 
@@ -34,7 +34,7 @@ test_that('nest method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, nest, data = .data$GENDER)
+    !!!list(es, nest, data = es$GENDER)
   )
 })
 
@@ -47,11 +47,14 @@ test_that('pivot_longer method preserves metadata', {
 })
 
 test_that('pivot_wider method preserves metadata', {
-  purrr::walk(
-    c(attr_preserved, class_preserved),
-    exec,
-    !!!list(
-      es, pivot_wider, names_from = 'SMOKING_STATUS', values_from = 'GENDER'
+  # Suppress message of tidyr::pivot_wider not using all_of(id_cols).
+  suppressMessages(
+    purrr::walk(
+      c(attr_preserved, class_preserved),
+      exec,
+      !!!list(
+        es, pivot_wider, names_from = 'SMOKING_STATUS', values_from = 'GENDER'
+      )
     )
   )
 })
@@ -65,9 +68,12 @@ test_that('replace_na method preserves metadata', {
 })
 
 test_that('separate method preserves metadata', {
-  purrr::walk(
-    c(attr_preserved, class_preserved),
-    exec,
-    !!!list(es, separate, col = 'SMOKING_STATUS', into = c('A', 'B'))
+  # Suppress warning of tidyr::separate using `as.character()` on a quosure.
+  suppressWarnings(
+    purrr::walk(
+      c(attr_preserved, class_preserved),
+      exec,
+      !!!list(es, separate, col = 'SMOKING_STATUS', into = c('A', 'B'))
+    )
   )
 })

@@ -26,7 +26,7 @@ test_that('count method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, count, .data$ATTAINED_AGE)
+    !!!list(es, count, es$ATTAINED_AGE)
   )
 })
 
@@ -34,7 +34,7 @@ test_that('distinct method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, distinct, .data$SMOKING_STATUS)
+    !!!list(es, distinct, es$SMOKING_STATUS)
   )
 })
 
@@ -42,7 +42,7 @@ test_that('filter method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, filter, .data$GENDER == 'FEMALE')
+    !!!list(es, filter, es$GENDER == 'FEMALE')
   )
 })
 
@@ -50,7 +50,7 @@ test_that('group_by method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, group_by, .data$UNDERWRITING_CLASS)
+    !!!list(es, group_by, es$UNDERWRITING_CLASS)
   )
 })
 
@@ -79,10 +79,12 @@ test_that('intersect method preserves metadata', {
 })
 
 test_that('left_join method preserves metadata', {
-  purrr::walk(
-    c(attr_preserved, class_preserved),
-    exec,
-    !!!list(es, left_join, y = es)
+  suppressMessages(
+    purrr::walk(
+      c(attr_preserved, class_preserved),
+      exec,
+      !!!list(es, left_join, y = es)
+    )
   )
 })
 
@@ -98,7 +100,7 @@ test_that('relocate method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, relocate, .data$ATTAINED_AGE, .before = 1)
+    !!!list(es, relocate, es$ATTAINED_AGE, .before = 1)
   )
 })
 
@@ -122,7 +124,7 @@ test_that('select method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, select, .data$RECORD_YEARSPAN)
+    !!!list(es, select, es$RECORD_YEARSPAN)
   )
 })
 
@@ -154,7 +156,7 @@ test_that('slice_max method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, slice_max, order_by = .data$ATTAINED_AGE, n = 100)
+    !!!list(es, slice_max, order_by = es$ATTAINED_AGE, n = 100)
   )
 })
 
@@ -165,7 +167,7 @@ test_that('slice_min method preserves metadata', {
     !!!list(
       es,
       slice_min,
-      order_by = .data$EXPECTED_DEATHS,
+      order_by = es$EXPECTED_DEATHS,
       prop = .3,
       with_ties = FALSE
     )
@@ -184,7 +186,7 @@ test_that('summarise method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, summarise, test = sum(.data$RECORD_YEARSPAN), .groups = 'drop')
+    !!!list(es, summarise, test = sum(es$RECORD_YEARSPAN), .groups = 'drop')
   )
 })
 
@@ -192,7 +194,7 @@ test_that('transmute method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, transmute, test = as.character(.data$ACTUAL_DEATHS))
+    !!!list(es, transmute, test = as.character(es$ACTUAL_DEATHS))
   )
 })
 
