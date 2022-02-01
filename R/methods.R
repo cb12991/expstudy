@@ -365,15 +365,19 @@ tidyr::pivot_wider
 pivot_wider.tbl_es <- function(
   data,
   id_cols = NULL,
+  id_expand = FALSE,
   names_from,
   names_prefix = "",
   names_sep = "_",
   names_glue = NULL,
   names_sort = FALSE,
+  names_vary = "fastest",
+  names_expand = FALSE,
   names_repair = "check_unique",
   values_from,
   values_fill = NULL,
   values_fn = NULL,
+  unused_fn = NULL,
   ...
 ) {
   out <- data
