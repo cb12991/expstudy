@@ -438,7 +438,7 @@ separate.tbl_es <- function(
   update_meta(
     new = separate(
       data = out,
-      col = {{ col }},
+      col = !!col,
       into = {{ into }},
       sep = sep,
       remove = remove,
