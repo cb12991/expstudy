@@ -1,3 +1,7 @@
+## Version 1.0.1
+
+Updated method to resolve length > 1 in coercion to logical error.
+
 ## Resubmission #3
 
 Package cleared automated checks. Issues within review by Gregor Seyer addressed as follows:
