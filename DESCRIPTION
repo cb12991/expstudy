@@ -1,6 +1,6 @@
 Package: expstudy
 Title: Experience Study Tools for Analytics and Communications
-Version: 1.0.1
+Version: 1.0.1.9000
 Authors@R: 
     person("Cody", "Buehler", , "cb12991@me.com", role = c("aut", "cre"))
 Description: Provides a data class of 'tbl_es' to help aid in the formation and
