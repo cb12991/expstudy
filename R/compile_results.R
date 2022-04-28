@@ -75,23 +75,18 @@ compile_results <- function(
   output <- match.arg(output, several.ok = TRUE)
   output_format <- match.arg(output_format, several.ok = TRUE)
   groups <- enquos(...)
+  group_combos <- list(list(NULL))
 
   if (!is_empty(groups)) {
-    group_combos <- map(
-      .x = seq_along(groups),
-      .f = ~ combn(map_chr(groups, as_name), .x, simplify = FALSE)
-    ) %>%
-      squash %>%
-      map(
-        .f = syms
+    group_combos %<>% append(
+      values = map(
+        .x = seq_along(groups),
+        .f = ~ combn(map_chr(groups, as_name), .x, simplify = FALSE)
       ) %>%
-      append(
-        values = list(
-          list(
-            NULL
-          )
-        ),
-        after = 0
+        squash %>%
+        map(
+          .f = syms
+        )
       )
   }
 

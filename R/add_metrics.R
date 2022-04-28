@@ -141,7 +141,7 @@ add_metrics <- function(
     metrics_applied <- metrics_applied %>%
       list_merge(
         name = .metric_nms[['act2expos']],
-        format = 'numeric'
+        format = 'percent'
       )
 
     metric_cols <- c(
@@ -178,7 +178,7 @@ add_metrics <- function(
     metrics_applied <- metrics_applied %>%
       list_merge(
         name = .metric_nms[['expec2expos']],
-        format = 'numeric'
+        format = 'percent'
       )
 
     metric_cols <- c(

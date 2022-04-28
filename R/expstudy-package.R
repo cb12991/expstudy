@@ -59,6 +59,7 @@
 #' @importFrom glue glue
 #' @importFrom glue glue_collapse
 #' @importFrom lifecycle deprecated
+#' @importFrom magrittr %<>%
 #' @importFrom magrittr %>%
 #' @importFrom methods setOldClass
 #' @importFrom pillar glimpse
