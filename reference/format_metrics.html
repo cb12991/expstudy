@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">expstudy</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,9 +128,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>     `:=`(ACTUAL_TO_EXPECTED = ACTUAL_DEATHS/EXPECTED_DEATHS, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         ACTUAL_TO_EXPOSED = ACTUAL_DEATHS/EXPOSURE, EXPECTED_TO_EXPOSED = EXPECTED_DEATHS/EXPOSURE)][, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     `:=`(CREDIBILITY = pmin(1, 0.05 * EXPECTED_DEATHS/sqrt(1.95996398454005 * </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         VARIANCE_DEATHS)))][, `:=`(ACTUAL_TO_EXPOSED = formatC(ACTUAL_TO_EXPOSED, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), EXPECTED_TO_EXPOSED = formatC(EXPECTED_TO_EXPOSED, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), ACTUAL_DEATHS = formatC(ACTUAL_DEATHS, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         VARIANCE_DEATHS)))][, `:=`(ACTUAL_DEATHS = formatC(ACTUAL_DEATHS, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), EXPECTED_DEATHS = formatC(EXPECTED_DEATHS, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), EXPOSURE = formatC(EXPOSURE, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     format = "f", big.mark = ",", digits = 2), VARIANCE_DEATHS = formatC(VARIANCE_DEATHS, </span>
@@ -139,6 +137,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), PROP_EXPOSURE = paste0(round(PROP_EXPOSURE * </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), PROP_VARIANCE_DEATHS = paste0(round(PROP_VARIANCE_DEATHS * </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), ACTUAL_TO_EXPECTED = paste0(round(ACTUAL_TO_EXPECTED * </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), ACTUAL_TO_EXPOSED = paste0(round(ACTUAL_TO_EXPOSED * </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), EXPECTED_TO_EXPOSED = paste0(round(EXPECTED_TO_EXPOSED * </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     100, 2), "%"), CREDIBILITY = paste0(round(CREDIBILITY * 100, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     2), "%"))]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
