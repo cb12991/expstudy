@@ -1,6 +1,10 @@
 # expstudy 1.0.2
 
+* Patch for compile_results
+
 # expstudy 1.0.1
+
+* Minor fixes
 
 # expstudy 1.0.0
 
