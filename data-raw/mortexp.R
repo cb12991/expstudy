@@ -93,7 +93,7 @@ mortexp <- tibble(
     BIRTH_YEAR * 10000 + BIRTH_MONTH * 100 + BIRTH_DAY
   ),
   DURATION_MONTH = map(
-    .x = ISSUE_DATE %--% coalesce(TERMINATION_DATE,now()) %/% months(1) + 2,
+    .x = ISSUE_DATE %--% coalesce(TERMINATION_DATE, now()) %/% months(1) + 2,
     .f = seq_len
   )
 ) %>%
