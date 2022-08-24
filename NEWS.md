@@ -1,4 +1,4 @@
-# expstudy (development version)
+# expstudy 1.0.2
 
 # expstudy 1.0.1
 
