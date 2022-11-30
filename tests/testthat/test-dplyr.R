@@ -58,7 +58,7 @@ test_that('group_map method preserves metadata', {
   purrr::walk(
     c(attr_preserved, class_preserved),
     exec,
-    !!!list(es, group_map, .f = as.data.frame)
+    !!!list(es, group_map, .f = function(dt,grp)as.data.frame(dt))
   )
 })
 
