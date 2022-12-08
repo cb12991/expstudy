@@ -1,3 +1,7 @@
+# expstudy 1.0.3
+
+* Small hotfix for unit test issue identified by data.table-revdeps 
+
 # expstudy 1.0.2
 
 * Patch for compile_results
