@@ -52,8 +52,8 @@ metric formulae.
   )
 
   # If no arguments are provided, all default metrics will be generated. This
-  # mostly makes sense for already aggregated expstudy objects, but can be used
-  # with unaggregated objects as well.
+  # mostly makes sense for already aggregated expstudy objects, but can be
+  # used with unaggregated objects as well.
    es \%>\%
      aggregate(ATTAINED_AGE) \%>\%
      add_metrics
