@@ -3,16 +3,11 @@
 \docType{package}
 \name{expstudy-package}
 \alias{expstudy-package}
-\title{expstudy: experience study tools for analytics and communication}
+\title{expstudy: Tools for Actuarial Experience Studies}
 \description{
-Provides a data class of 'tbl_es' to help aid in the formation and analyses of recurrent or novel experience studies. A 'tbl_es' has attributes which identify the key variables used for calculating metrics under an actuarial perspective. Common metrics (such as actual-to-expected analysis) can be quickly generated in aggregate or according to different qualitative factors. If multiple factors are of interest, grouped metrics can be automatically computed for each factor individually as well as for all possible combinations. All resulting output can then be formatted for presentations or left unformatted for subsequent analyses. Ultimately, this package aims to reduce time spent completing repetitive code therefore increasing time for analysis and insight.
-}
-\details{
-The \code{expstudy} package provides an subclass, \link{tbl_es}, for
-\code{\link[dtplyr:lazy_dt]{dtplyr::lazy_dt()}} that stores attributes relating to an experience study.
-These attributes along with other functions reduce the time needed to
-review an assumption via actual-to-expected analysis in addition
-to exploring new relevant patterns or correlations.
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+Experiences studies are an integral component of the actuarial control cycle. Regardless of the decrement or policyholder behaviour of interest, the analyses conducted is often the same. Ultimately, this package aims to reduce time spent writing the same code used for different experience studies, therefore increasing the time for to uncover new insights inherit within the relevant experience.
 }
 \seealso{
 Useful links:
