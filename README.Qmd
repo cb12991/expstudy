@@ -1,0 +1,175 @@
+---
+format: gfm
+---
+
+<!-- README.md is generated from README.Qmd. Please edit that file -->
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE,
+  fig.path = "man/figures/README-"
+)
+```
+
+# expstudy <a href="https://cb12991.github.io/expstudy/"><img src="man/figures/logo.png" align="right" height="120" alt="expstudy website" /></a>
+
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/expstudy.png)](https://CRAN.R-project.org/package=expstudy)
+[![R-CMD-check](https://github.com/cb12991/expstudy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cb12991/expstudy/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/cb12991/expstudy/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/cb12991/expstudy/actions/workflows/test-coverage.yaml)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/expstudy.png)](http://www.r-pkg.org/pkg/expstudy)
+<!-- badges: end -->
+
+The goal of expstudy is to provide a set of tools to quickly conduct analysis of an experience study. Commonly used techniques (such as actual-to-expected analysis) are generalized and streamlined so that repetitive coding is avoided. 
+
+Most analyses for an experience study is structured around *measures* for a particular decrement of interest, e.g., the number of policy surrenders for a surrender experience study. For any given decrement of interest, the following measures are commonly utilized:
+
+* **Actuals**: the actual decrement count (or amount) observed
+* **Exposures**: the number of policies or the face amount of insurance exposed to the decrement of interest
+* **Expecteds**: the expected decrement count or amount per unit of exposure
+* **Variances**: the expectation variance of an underlying assumption for the expecteds of the study (used primarily for confidence intervals and credibility scores)
+
+expstudy provides functions to recognize or identify study measures so that the routine analyses can be streamlined. 
+
+# Installation
+
+expstudy is published to CRAN so you can download directly from any CRAN mirror:
+
+```{r}
+#| eval: false
+install.packages('expstudy')
+```
+
+## Development version
+
+To get a bug fix or to use a feature from the development version, you can install the development version of expstudy from GitHub.
+
+```{r}
+#| eval: false
+# Uncomment below if you do not have pak installed yet.
+# install.packages('pak')
+pak::pak('cb12991/expstudy')
+```
+
+# Usage
+
+```{r}
+library(expstudy)
+```
+
+This package provides a sample mortality experience study to aid with examples:
+
+```{r}
+pillar::glimpse(mortexp)
+```
+
+Assumptions within an experience study are often evaluated via actual-to-expected (AE) ratios. The aggregate assumption performance can be reviewed by totaling up the actuals and dividing by the total expecteds to produce the AE ratio. An AE ratio close to 100% signifies the expectation using the underlying assumption reflects actual policyholder behavior observed in experience. 
+
+Calculating the aggregate AE ratio without expstudy (with the help of the tidyverse/dplyr package) is shown below:
+
+```{r}
+library(dplyr)
+mortexp %>%
+  summarise(
+    across(
+      .cols = c(
+        MORT_EXPOSURE_CNT, MORT_ACTUAL_CNT, MORT_EXPECTED_CNT, 
+        MORT_VARIANCE_CNT, MORT_EXPOSURE_AMT, MORT_ACTUAL_AMT, 
+        MORT_EXPECTED_AMT, MORT_VARIANCE_AMT
+      ),
+      .fns = \(x) sum(x, na.rm = TRUE)
+    )
+  ) %>%
+  mutate(
+    CNT_AE_RATIO = MORT_ACTUAL_CNT / MORT_EXPECTED_CNT,
+    AMT_AE_RATIO = MORT_ACTUAL_AMT / MORT_EXPECTED_AMT
+  ) %>%
+  glimpse
+```
+
+Using expstudy, the code to produce the same output is as follows:
+
+```{r}
+mortexp %>% summarise_measures %>% mutate_metrics %>% glimpse
+```
+
+The runtimes of each do not significantly differ, so there is no performance degradation with the code improvement:
+
+```{r}
+library(microbenchmark)
+library(ggplot2)
+autoplot(microbenchmark(
+  dplyr_only = mortexp %>%
+  summarise(
+    across(
+      .cols = c(
+        MORT_EXPOSURE_CNT, MORT_ACTUAL_CNT, MORT_EXPECTED_CNT, 
+        MORT_VARIANCE_CNT, MORT_EXPOSURE_AMT, MORT_ACTUAL_AMT, 
+        MORT_EXPECTED_AMT, MORT_VARIANCE_AMT
+      ),
+      .fns = \(x) sum(x, na.rm = TRUE)
+    )
+  ) %>%
+  mutate(
+    CNT_AE_RATIO = MORT_ACTUAL_CNT / MORT_EXPECTED_CNT,
+    AMT_AE_RATIO = MORT_ACTUAL_AMT / MORT_EXPECTED_AMT
+  ),
+  expstudy = mortexp %>% summarise_measures %>% mutate_metrics
+))
+
+```
+
+Note that expstudy is calculating more than the AE ratio metric. Without those additional metrics, performance with expstudy actually surpasses performance without:
+
+```{r}
+autoplot(microbenchmark(
+  dplyr_only = mortexp %>%
+  summarise(
+    across(
+      .cols = c(
+        MORT_EXPOSURE_CNT, MORT_ACTUAL_CNT, MORT_EXPECTED_CNT, 
+        MORT_VARIANCE_CNT, MORT_EXPOSURE_AMT, MORT_ACTUAL_AMT, 
+        MORT_EXPECTED_AMT, MORT_VARIANCE_AMT
+      ),
+      .fns = \(x) sum(x, na.rm = TRUE)
+    )
+  ) %>%
+  mutate(
+    CNT_AE_RATIO = MORT_ACTUAL_CNT / MORT_EXPECTED_CNT,
+    AMT_AE_RATIO = MORT_ACTUAL_AMT / MORT_EXPECTED_AMT
+  ),
+  expstudy = mortexp %>% 
+    summarise_measures %>%
+    mutate_metrics(
+      metrics = list(AE_RATIO = ae_ratio)
+    )
+))
+```
+
+Whenever there is not enough credibility for a company to write their own assumption, adjustment factors are often used to incorporate emergine experience. expstudy provides a function to determine factor adjustments for each provided set of measures using a variety of methods.
+
+```{r}
+mortexp %>%
+  group_by(
+    GENDER,
+    SMOKING_STATUS
+  ) %>%
+  compute_fct_adjs(
+    expected_rate = EXPECTED_MORTALITY_RT,
+    amount_scalar = FACE_AMOUNT,
+    method = 'sequential'
+  )
+```
+
+Refer to each function's documentation page for additional detail. 
+
+# Code of Conduct
+
+Please note that the expstudy project is released with a [Contributor Code of Conduct](https://cb12991.github.io/expstudy/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+

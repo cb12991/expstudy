@@ -12,3 +12,4 @@
 ^\.covrignore$
 ^revdep$
 ^data-raw$
+^README\.Qmd$
