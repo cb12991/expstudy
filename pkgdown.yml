@@ -1,8 +1,8 @@
 pandoc: 2.19.2
-pkgdown: 2.0.6
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-12-08T18:32Z
+last_built: 2024-02-01T21:41Z
 urls:
   reference: https://cb12991.github.io/expstudy/reference
   article: https://cb12991.github.io/expstudy/articles
