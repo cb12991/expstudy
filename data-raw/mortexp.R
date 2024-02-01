@@ -35,6 +35,12 @@ mortexp <- tibble(
       prob = c(.65, .25, 0.1)
     )
   ),
+  FACE_AMOUNT = sample(
+    x = c(5000, 10000, 25000, 50000, 100000),
+    size = 1000,
+    replace = TRUE,
+    prob = c(0.55, 0.225, 0.125, 0.075, 0.025)
+  ),
   ISSUE_YEAR = if_else(
     POLICY_STATUS == 'INFORCE',
     year(now()) - MAX_DURATION,
@@ -92,20 +98,22 @@ mortexp <- tibble(
   INSURED_DOB = ymd(
     BIRTH_YEAR * 10000 + BIRTH_MONTH * 100 + BIRTH_DAY
   ),
-  DURATION_MONTH = map(
+  POLICY_DURATION_MNTH = map(
     .x = ISSUE_DATE %--% coalesce(TERMINATION_DATE, now()) %/% months(1) + 2,
     .f = seq_len
   )
 ) %>%
   unnest(
-    DURATION_MONTH
+    POLICY_DURATION_MNTH
   ) %>%
   mutate(
-    DURATION_YEAR = (DURATION_MONTH - 1) %/% 12 + 1,
-    AS_OF_DATE = rollforward(ISSUE_DATE %m+% months(DURATION_MONTH - 1)),
-    NEXT_ANNIVERSARY_DATE = ISSUE_DATE + years(DURATION_YEAR),
+    POLICY_DURATION_YR = (POLICY_DURATION_MNTH - 1) %/% 12 + 1,
+    AS_OF_DATE = rollforward(ISSUE_DATE %m+% months(POLICY_DURATION_MNTH - 1)),
+    NEXT_ANNIVERSARY_DATE = ISSUE_DATE + years(POLICY_DURATION_YR),
+    ATTAINED_AGE = INSURED_DOB %--% AS_OF_DATE %/% years() + 1,
+    EXPECTED_MORTALITY_RT = 1 / (120 - pmin(120, ATTAINED_AGE)), # De Moivre's
     EXPOSURE_START_DATE = if_else(
-      DURATION_MONTH == 1,
+      POLICY_DURATION_MNTH == 1,
       ISSUE_DATE,
       rollbackward(AS_OF_DATE, roll_to_first = TRUE)
     ),
@@ -120,17 +128,19 @@ mortexp <- tibble(
     ),
     EXPOSURE_DAYS = EXPOSURE_START_DATE %--% EXPOSURE_END_DATE %/% days(),
     CALENDAR_YEAR_DAYS = 365 + if_else(leap_year(AS_OF_DATE), 1, 0),
-    EXPOSURE = EXPOSURE_DAYS / CALENDAR_YEAR_DAYS,
-    ATTAINED_AGE = INSURED_DOB %--% AS_OF_DATE %/% years() + 1,
-    ACTUAL_DEATHS = if_else(
+    MORT_EXPOSURE_CNT = EXPOSURE_DAYS / CALENDAR_YEAR_DAYS,
+    MORT_EXPOSURE_AMT = MORT_EXPOSURE_CNT * FACE_AMOUNT,
+    MORT_ACTUAL_CNT = if_else(
       POLICY_STATUS == 'DEATH' &
         TERMINATION_DATE %within% (EXPOSURE_START_DATE %--% EXPOSURE_END_DATE),
       1,
       0
     ),
-    EXPECTED_MORTALITY_RT = 1 / (120 - pmin(120, ATTAINED_AGE)), # De Moivre's
-    EXPECTED_DEATHS = EXPOSURE * EXPECTED_MORTALITY_RT,
-    VARIANCE_DEATHS = EXPECTED_DEATHS * (1 - EXPECTED_DEATHS)
+    MORT_ACTUAL_AMT = MORT_ACTUAL_CNT * FACE_AMOUNT,
+    MORT_EXPECTED_CNT = MORT_EXPOSURE_CNT * EXPECTED_MORTALITY_RT,
+    MORT_EXPECTED_AMT = MORT_EXPECTED_CNT * FACE_AMOUNT,
+    MORT_VARIANCE_CNT = MORT_EXPECTED_CNT * (1 - MORT_EXPECTED_CNT),
+    MORT_VARIANCE_AMT = MORT_VARIANCE_CNT * (FACE_AMOUNT^2)
   ) %>%
   select(
     AS_OF_DATE,
@@ -138,19 +148,24 @@ mortexp <- tibble(
     GENDER,
     SMOKING_STATUS,
     UNDERWRITING_CLASS,
+    FACE_AMOUNT,
     INSURED_DOB,
     ISSUE_DATE,
+    TERMINATION_DATE,
     ISSUE_AGE,
     ATTAINED_AGE,
-    DURATION_MONTH,
-    DURATION_YEAR,
-    POLICY_STATUS,
-    TERMINATION_DATE,
-    EXPOSURE,
-    ACTUAL_DEATHS,
     EXPECTED_MORTALITY_RT,
-    EXPECTED_DEATHS,
-    VARIANCE_DEATHS
+    POLICY_DURATION_YR,
+    POLICY_DURATION_MNTH,
+    POLICY_STATUS,
+    MORT_EXPOSURE_CNT,
+    MORT_EXPOSURE_AMT,
+    MORT_ACTUAL_CNT,
+    MORT_ACTUAL_AMT,
+    MORT_EXPECTED_CNT,
+    MORT_EXPECTED_AMT,
+    MORT_VARIANCE_CNT,
+    MORT_VARIANCE_AMT
   )
 
-use_data(mortexp, overwrite = TRUE)
+use_data(as.data.frame(mortexp), overwrite = TRUE)
