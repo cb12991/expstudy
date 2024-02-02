@@ -1,9 +1,12 @@
 # Built from example available here: https://github.com/quarto-dev/quarto-actions/blob/main/examples/quarto-publish-example.yml
 on:
   push:
-    paths: ['**.Qmd']
+    paths:
+      - '**.Qmd'
+    branches:
+      - main
 
-name: render-quarto-markdown
+name: Render Quarto markdown documents to GFM
 
 # you need these permissions to publish to GitHub pages
 permissions:
@@ -19,8 +22,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-          with:
-            fetch-depth: 0
+        with:
+          fetch-depth: 0
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -82,7 +85,7 @@ jobs:
       - name: Render Quarto markdown files and commit results
         run: |
           QMD_PATH=($(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '[.]Qmd$'))
-          quarto render ${QMD_PATH[*]} --to gfm
+          quarto render ${QMD_PATH[*]}
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git commit ${QMD_PATH[*]/.Qmd/.md} -m 'Re-build Quarto markdown files' || echo "No changes to commit"
