@@ -66,7 +66,7 @@ library(expstudy)
 This package provides a sample mortality experience study to aid with examples:
 
 ```{r}
-pillar::glimpse(mortexp)
+dplyr::glimpse(mortexp)
 ```
 
 Assumptions within an experience study are often evaluated via actual-to-expected (AE) ratios. The aggregate assumption performance can be reviewed by totaling up the actuals and dividing by the total expecteds to produce the AE ratio. An AE ratio close to 100% signifies the expectation using the underlying assumption reflects actual policyholder behavior observed in experience. 
