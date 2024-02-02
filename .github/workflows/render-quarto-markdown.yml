@@ -20,6 +20,11 @@ jobs:
     env:
       GITHUB_PATH: ${{ secrets.GITHUB_TOKEN }}
 
+     permissions:
+       # Give the default GITHUB_TOKEN write permission to commit and push the
+       # added or changed files to the repository.
+       contents: write
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -48,7 +53,6 @@ jobs:
       - name: Setup R dependencies
         uses:  r-lib/actions/setup-r-dependencies@v2
         with:
-          cache-version: 2
           extra-packages: |
             any::pkgdown
             local::.
