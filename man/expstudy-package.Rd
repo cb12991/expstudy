@@ -7,7 +7,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Experiences studies are an integral component of the actuarial control cycle. Regardless of the decrement or policyholder behaviour of interest, the analyses conducted is often the same. Ultimately, this package aims to reduce time spent writing the same code used for different experience studies, therefore increasing the time for to uncover new insights inherit within the relevant experience.
+Experiences studies are an integral component of the actuarial control cycle. Regardless of the decrement or policyholder behavior of interest, the analyses conducted is often the same. Ultimately, this package aims to reduce time spent writing the same code used for different experience studies, therefore increasing the time for to uncover new insights inherit within the relevant experience.
 }
 \seealso{
 Useful links:

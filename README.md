@@ -224,7 +224,7 @@ autoplot(microbenchmark(
 
 Whenever there is not enough credibility for a company to write their
 own assumption, adjustment factors are often used to incorporate
-emergine experience. expstudy provides a function to determine factor
+emerging experience. expstudy provides a function to determine factor
 adjustments for each provided set of measures using a variety of
 methods.
 

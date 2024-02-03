@@ -56,7 +56,7 @@ the standard error calculation.}
 \item{two_tailed}{A boolean indicating whether or not a two-tailed hypothesis test should be
 utilized.}
 
-\item{distance_from_mean}{A number between 0 and 1 representing the precicision of the credibility
+\item{distance_from_mean}{A number between 0 and 1 representing the precision of the credibility
 estimate.}
 
 \item{cred_conf}{A number between 0 and 1 corresponding to the confidence level surrounding

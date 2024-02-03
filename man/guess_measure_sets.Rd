@@ -14,7 +14,7 @@ guess_measure_sets(
 \arguments{
 \item{data}{A \code{\link{data.frame}} that houses an experience study.}
 
-\item{measure_regexs}{A named list of patterns to use as regexes when guessing columns in the
+\item{measure_regexs}{A named list of patterns to use as regexs when guessing columns in the
 study dataset to be used for one study measure in each measure set. There
 must be one column for each measure in a measure set (actuals, expecteds,
 exposures, and variances). Defaults to
