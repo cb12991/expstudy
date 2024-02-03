@@ -1,9 +1,9 @@
 # Built from example available here: https://github.com/quarto-dev/quarto-actions/blob/main/examples/quarto-publish-example.yml
 on:
   push:
-    paths:
-      - 'README.Qmd'
-      - 'README.qmd'
+    # paths:
+    #   - 'README.Qmd'
+    #   - 'README.qmd'
     branches:
       - main
 
