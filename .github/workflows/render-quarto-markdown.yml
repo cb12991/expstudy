@@ -10,20 +10,15 @@ on:
 name: Render Quarto markdown README docs to GFM
 
 # you need these permissions to publish to GitHub pages
-# permissions:
-#   contents: write
-#   pages: write
+permissions:
+  contents: write
+  pages: write
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     env:
       GITHUB_PATH: ${{ secrets.GITHUB_TOKEN }}
-
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
-      contents: write
 
     steps:
       - name: Check out repository
@@ -58,7 +53,6 @@ jobs:
             local::.
             any::ggplot2
             any::microbenchmark
-
 
       # From https://github.com/julia-actions/setup-julia
       # - name: Setup Julia
