@@ -9,6 +9,8 @@
 status](https://www.r-pkg.org/badges/version/expstudy.png)](https://CRAN.R-project.org/package=expstudy)
 [![R-CMD-check](https://github.com/cb12991/expstudy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cb12991/expstudy/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/cb12991/expstudy/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/cb12991/expstudy/actions/workflows/test-coverage.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/cb12991/expstudy/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cb12991/expstudy?branch=main)
 [![CRAN RStudio mirror
 downloads](http://cranlogs.r-pkg.org/badges/expstudy.png)](http://www.r-pkg.org/pkg/expstudy)
 <!-- badges: end -->
@@ -65,7 +67,7 @@ This package provides a sample mortality experience study to aid with
 examples:
 
 ``` r
-pillar::glimpse(mortexp)
+dplyr::glimpse(mortexp)
 #> Rows: 176,096
 #> Columns: 23
 #> $ AS_OF_DATE            <date> 1998-04-30, 1998-05-31, 1998-06-30, 1998-07-31,…
