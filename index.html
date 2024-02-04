@@ -5,31 +5,34 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Experiences studies are an integral component of the actuarial 
-    control cycle. Regardless of the decrement or policyholder behavior of 
-    interest, the analyses conducted is often the same. Ultimately, this 
-    package aims to reduce time spent writing the same code used for 
-    different experience studies, therefore increasing the time for to uncover
-    new insights inherit within the relevant experience.">
-<title>Tools for Actuarial Experience Studies • expstudy</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<meta name="description" content="Provides a data class of tbl_es to help aid in the formation and
+    analyses of recurrent or novel experience studies. A tbl_es has attributes
+    which identify the key variables used for calculating metrics under an 
+    actuarial perspective. Common metrics (such as actual-to-expected analysis) 
+    can be quickly generated in aggregate or according to different qualitative 
+    factors. If multiple factors are of interest, grouped metrics can be 
+    automatically computed for each factor individually as well as for all 
+    possible combinations. All resulting output can then be formatted for 
+    presentations or left unformatted for subsequent analyses. Ultimately, this
+    package aims to reduce time spent completing repetitive code therefore 
+    increasing time for analysis and insight.">
+<title>Experience Study Tools for Analytics and Communications • expstudy</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Tools for Actuarial Experience Studies">
-<meta property="og:description" content="Experiences studies are an integral component of the actuarial 
-    control cycle. Regardless of the decrement or policyholder behavior of 
-    interest, the analyses conducted is often the same. Ultimately, this 
-    package aims to reduce time spent writing the same code used for 
-    different experience studies, therefore increasing the time for to uncover
-    new insights inherit within the relevant experience.">
-<meta property="og:image" content="https://cb12991.github.io/expstudy/logo.png">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Experience Study Tools for Analytics and Communications">
+<meta property="og:description" content="Provides a data class of tbl_es to help aid in the formation and
+    analyses of recurrent or novel experience studies. A tbl_es has attributes
+    which identify the key variables used for calculating metrics under an 
+    actuarial perspective. Common metrics (such as actual-to-expected analysis) 
+    can be quickly generated in aggregate or according to different qualitative 
+    factors. If multiple factors are of interest, grouped metrics can be 
+    automatically computed for each factor individually as well as for all 
+    possible combinations. All resulting output can then be formatted for 
+    presentations or left unformatted for subsequent analyses. Ultimately, this
+    package aims to reduce time spent completing repetitive code therefore 
+    increasing time for analysis and insight.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -43,7 +46,7 @@
     
     <a class="navbar-brand me-2" href="index.html">expstudy</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,212 +81,141 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="expstudy-">expstudy 
-<a class="anchor" aria-label="anchor" href="#expstudy-"></a>
-</h1>
-</div>
+<div class="page-header"><h1 id="expstudy">expstudy<a class="anchor" aria-label="anchor" href="#expstudy"></a>
+</h1></div>
 <!-- badges: start -->
 
-<p>The goal of expstudy is to provide a set of tools to quickly conduct analysis of an experience study. Commonly used techniques (such as actual-to-expected analysis) are generalized and streamlined so that repetitive coding is avoided.</p>
-<p>Most analyses for an experience study is structured around <em>measures</em> for a particular decrement of interest, e.g., the number of policy surrenders for a surrender experience study. For any given decrement of interest, the following measures are commonly utilized:</p>
-<ul>
-<li>
-<strong>Actuals</strong>: the actual decrement count (or amount) observed</li>
-<li>
-<strong>Exposures</strong>: the number of policies or the face amount of insurance exposed to the decrement of interest</li>
-<li>
-<strong>Expecteds</strong>: the expected decrement count or amount per unit of exposure</li>
-<li>
-<strong>Variances</strong>: the expectation variance of an underlying assumption for the expecteds of the study (used primarily for confidence intervals and credibility scores)</li>
-</ul>
-<p>expstudy provides functions to recognize or identify study measures so that the routine analyses can be streamlined.</p>
-</div>
-<div class="section level1">
-<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h1>
-<p>expstudy is published to CRAN so you can download directly from any CRAN mirror:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'expstudy'</span><span class="op">)</span></span></code></pre></div>
+<p>The goal of <strong>expstudy</strong> is to provide a set of tools to quickly conduct analysis of an experience study. Commonly used techniques (such as actual-to-expected analysis) are generalized and streamlined so that repetitive coding is avoided.</p>
 <div class="section level2">
-<h2 id="development-version">Development version<a class="anchor" aria-label="anchor" href="#development-version"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>To get a bug fix or to use a feature from the development version, you can install the development version of expstudy from GitHub.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># This package has not yet been submitted to CRAN, however,</span></span>
+<span><span class="co"># you can install the development version from GitHub:</span></span>
+<span></span>
+<span><span class="co"># install.packages('devtools')</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'cb12991/expstudy'</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Uncomment below if you do not have pak installed yet.</span></span>
-<span><span class="co"># install.packages('pak')</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'cb12991/expstudy'</span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level1">
-<h1 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
-</h1>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cb12991/expstudy" class="external-link">expstudy</a></span><span class="op">)</span></span></code></pre></div>
-<p>This package provides a sample mortality experience study to aid with examples:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">mortexp</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 176,096</span></span>
-<span><span class="co">#&gt; Columns: 23</span></span>
-<span><span class="co">#&gt; $ AS_OF_DATE            &lt;date&gt; 1998-04-30, 1998-05-31, 1998-06-30, 1998-07-31,…</span></span>
-<span><span class="co">#&gt; $ POLICY_HOLDER         &lt;fct&gt; PH_0001, PH_0001, PH_0001, PH_0001, PH_0001, PH_…</span></span>
-<span><span class="co">#&gt; $ GENDER                &lt;fct&gt; FEMALE, FEMALE, FEMALE, FEMALE, FEMALE, FEMALE, …</span></span>
-<span><span class="co">#&gt; $ SMOKING_STATUS        &lt;fct&gt; NON-SMOKER, NON-SMOKER, NON-SMOKER, NON-SMOKER, …</span></span>
-<span><span class="co">#&gt; $ UNDERWRITING_CLASS    &lt;fct&gt; STANDARD, STANDARD, STANDARD, STANDARD, STANDARD…</span></span>
-<span><span class="co">#&gt; $ FACE_AMOUNT           &lt;dbl&gt; 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, …</span></span>
-<span><span class="co">#&gt; $ INSURED_DOB           &lt;date&gt; 1977-01-20, 1977-01-20, 1977-01-20, 1977-01-20,…</span></span>
-<span><span class="co">#&gt; $ ISSUE_DATE            &lt;date&gt; 1998-04-02, 1998-04-02, 1998-04-02, 1998-04-02,…</span></span>
-<span><span class="co">#&gt; $ TERMINATION_DATE      &lt;date&gt; 2013-08-08, 2013-08-08, 2013-08-08, 2013-08-08,…</span></span>
-<span><span class="co">#&gt; $ ISSUE_AGE             &lt;dbl&gt; 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, …</span></span>
-<span><span class="co">#&gt; $ ATTAINED_AGE          &lt;dbl&gt; 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23, …</span></span>
-<span><span class="co">#&gt; $ EXPECTED_MORTALITY_RT &lt;dbl&gt; 0.01020408, 0.01020408, 0.01020408, 0.01020408, …</span></span>
-<span><span class="co">#&gt; $ POLICY_DURATION_YR    &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, …</span></span>
-<span><span class="co">#&gt; $ POLICY_DURATION_MNTH  &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1…</span></span>
-<span><span class="co">#&gt; $ POLICY_STATUS         &lt;fct&gt; SURRENDERED, SURRENDERED, SURRENDERED, SURRENDER…</span></span>
-<span><span class="co">#&gt; $ MORT_EXPOSURE_CNT     &lt;dbl&gt; 0.07671233, 0.08219178, 0.07945205, 0.08219178, …</span></span>
-<span><span class="co">#&gt; $ MORT_EXPOSURE_AMT     &lt;dbl&gt; 383.5616, 410.9589, 397.2603, 410.9589, 410.9589…</span></span>
-<span><span class="co">#&gt; $ MORT_ACTUAL_CNT       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
-<span><span class="co">#&gt; $ MORT_ACTUAL_AMT       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
-<span><span class="co">#&gt; $ MORT_EXPECTED_CNT     &lt;dbl&gt; 0.0007827789, 0.0008386916, 0.0008107353, 0.0008…</span></span>
-<span><span class="co">#&gt; $ MORT_EXPECTED_AMT     &lt;dbl&gt; 3.913894, 4.193458, 4.053676, 4.193458, 4.193458…</span></span>
-<span><span class="co">#&gt; $ MORT_VARIANCE_CNT     &lt;dbl&gt; 0.0007821661, 0.0008379882, 0.0008100780, 0.0008…</span></span>
-<span><span class="co">#&gt; $ MORT_VARIANCE_AMT     &lt;dbl&gt; 19554.15, 20949.71, 20251.95, 20949.71, 20949.71…</span></span></code></pre></div>
-<p>Assumptions within an experience study are often evaluated via actual-to-expected (AE) ratios. The aggregate assumption performance can be reviewed by totaling up the actuals and dividing by the total expecteds to produce the AE ratio. An AE ratio close to 100% signifies the expectation using the underlying assumption reflects actual policyholder behavior observed in experience.</p>
-<p>Calculating the aggregate AE ratio without expstudy (with the help of the tidyverse/dplyr package) is shown below:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="va">mortexp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span></span>
-<span>      .cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>        <span class="va">MORT_EXPOSURE_CNT</span>, <span class="va">MORT_ACTUAL_CNT</span>, <span class="va">MORT_EXPECTED_CNT</span>, </span>
-<span>        <span class="va">MORT_VARIANCE_CNT</span>, <span class="va">MORT_EXPOSURE_AMT</span>, <span class="va">MORT_ACTUAL_AMT</span>, </span>
-<span>        <span class="va">MORT_EXPECTED_AMT</span>, <span class="va">MORT_VARIANCE_AMT</span></span>
-<span>      <span class="op">)</span>,</span>
-<span>      .fns <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    CNT_AE_RATIO <span class="op">=</span> <span class="va">MORT_ACTUAL_CNT</span> <span class="op">/</span> <span class="va">MORT_EXPECTED_CNT</span>,</span>
-<span>    AMT_AE_RATIO <span class="op">=</span> <span class="va">MORT_ACTUAL_AMT</span> <span class="op">/</span> <span class="va">MORT_EXPECTED_AMT</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="va">glimpse</span></span>
-<span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ MORT_EXPOSURE_CNT &lt;dbl&gt; 14295.43</span></span>
-<span><span class="co">#&gt; $ MORT_ACTUAL_CNT   &lt;dbl&gt; 315</span></span>
-<span><span class="co">#&gt; $ MORT_EXPECTED_CNT &lt;dbl&gt; 256.4227</span></span>
-<span><span class="co">#&gt; $ MORT_VARIANCE_CNT &lt;dbl&gt; 255.9583</span></span>
-<span><span class="co">#&gt; $ MORT_EXPOSURE_AMT &lt;dbl&gt; 210257356</span></span>
-<span><span class="co">#&gt; $ MORT_ACTUAL_AMT   &lt;dbl&gt; 4650000</span></span>
-<span><span class="co">#&gt; $ MORT_EXPECTED_AMT &lt;dbl&gt; 3843358</span></span>
-<span><span class="co">#&gt; $ MORT_VARIANCE_AMT &lt;dbl&gt; 148007176380</span></span>
-<span><span class="co">#&gt; $ CNT_AE_RATIO      &lt;dbl&gt; 1.22844</span></span>
-<span><span class="co">#&gt; $ AMT_AE_RATIO      &lt;dbl&gt; 1.20988</span></span></code></pre></div>
-<p>Using expstudy, the code to produce the same output is as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mortexp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">summarise_measures</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">mutate_metrics</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">glimpse</span></span>
-<span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 18</span></span>
-<span><span class="co">#&gt; $ MORT_ACTUAL_CNT   &lt;dbl&gt; 315</span></span>
-<span><span class="co">#&gt; $ MORT_EXPOSURE_CNT &lt;dbl&gt; 14295.43</span></span>
-<span><span class="co">#&gt; $ MORT_EXPECTED_CNT &lt;dbl&gt; 256.4227</span></span>
-<span><span class="co">#&gt; $ MORT_VARIANCE_CNT &lt;dbl&gt; 255.9583</span></span>
-<span><span class="co">#&gt; $ MORT_ACTUAL_AMT   &lt;dbl&gt; 4650000</span></span>
-<span><span class="co">#&gt; $ MORT_EXPOSURE_AMT &lt;dbl&gt; 210257356</span></span>
-<span><span class="co">#&gt; $ MORT_EXPECTED_AMT &lt;dbl&gt; 3843358</span></span>
-<span><span class="co">#&gt; $ MORT_VARIANCE_AMT &lt;dbl&gt; 148007176380</span></span>
-<span><span class="co">#&gt; $ AVG_OBSRV_CNT     &lt;dbl&gt; 0.02203501</span></span>
-<span><span class="co">#&gt; $ AVG_EXPEC_CNT     &lt;dbl&gt; 0.01793739</span></span>
-<span><span class="co">#&gt; $ CI_FCTR_CNT       &lt;dbl&gt; 0.002193488</span></span>
-<span><span class="co">#&gt; $ AE_RATIO_CNT      &lt;dbl&gt; 1.22844</span></span>
-<span><span class="co">#&gt; $ CREDIBILITY_CNT   &lt;dbl&gt; 0.4088781</span></span>
-<span><span class="co">#&gt; $ AVG_OBSRV_AMT     &lt;dbl&gt; 0.02211575</span></span>
-<span><span class="co">#&gt; $ AVG_EXPEC_AMT     &lt;dbl&gt; 0.0182793</span></span>
-<span><span class="co">#&gt; $ CI_FCTR_AMT       &lt;dbl&gt; 0.003586231</span></span>
-<span><span class="co">#&gt; $ AE_RATIO_AMT      &lt;dbl&gt; 1.20988</span></span>
-<span><span class="co">#&gt; $ CREDIBILITY_AMT   &lt;dbl&gt; 0.2548539</span></span></code></pre></div>
-<p>The runtimes of each do not significantly differ, so there is no performance degradation with the code improvement:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/" class="external-link">microbenchmark</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="fu">autoplot</span><span class="op">(</span><span class="fu">microbenchmark</span><span class="op">(</span></span>
-<span>  dplyr_only <span class="op">=</span> <span class="va">mortexp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span></span>
-<span>      .cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>        <span class="va">MORT_EXPOSURE_CNT</span>, <span class="va">MORT_ACTUAL_CNT</span>, <span class="va">MORT_EXPECTED_CNT</span>, </span>
-<span>        <span class="va">MORT_VARIANCE_CNT</span>, <span class="va">MORT_EXPOSURE_AMT</span>, <span class="va">MORT_ACTUAL_AMT</span>, </span>
-<span>        <span class="va">MORT_EXPECTED_AMT</span>, <span class="va">MORT_VARIANCE_AMT</span></span>
-<span>      <span class="op">)</span>,</span>
-<span>      .fns <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    CNT_AE_RATIO <span class="op">=</span> <span class="va">MORT_ACTUAL_CNT</span> <span class="op">/</span> <span class="va">MORT_EXPECTED_CNT</span>,</span>
-<span>    AMT_AE_RATIO <span class="op">=</span> <span class="va">MORT_ACTUAL_AMT</span> <span class="op">/</span> <span class="va">MORT_EXPECTED_AMT</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  expstudy <span class="op">=</span> <span class="va">mortexp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">summarise_measures</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">mutate_metrics</span></span>
-<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-8-1.png"></p>
-<p>Note that expstudy is calculating more than the AE ratio metric. Without those additional metrics, performance with expstudy actually surpasses performance without:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">autoplot</span><span class="op">(</span><span class="fu">microbenchmark</span><span class="op">(</span></span>
-<span>  dplyr_only <span class="op">=</span> <span class="va">mortexp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span></span>
-<span>      .cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>        <span class="va">MORT_EXPOSURE_CNT</span>, <span class="va">MORT_ACTUAL_CNT</span>, <span class="va">MORT_EXPECTED_CNT</span>, </span>
-<span>        <span class="va">MORT_VARIANCE_CNT</span>, <span class="va">MORT_EXPOSURE_AMT</span>, <span class="va">MORT_ACTUAL_AMT</span>, </span>
-<span>        <span class="va">MORT_EXPECTED_AMT</span>, <span class="va">MORT_VARIANCE_AMT</span></span>
-<span>      <span class="op">)</span>,</span>
-<span>      .fns <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    CNT_AE_RATIO <span class="op">=</span> <span class="va">MORT_ACTUAL_CNT</span> <span class="op">/</span> <span class="va">MORT_EXPECTED_CNT</span>,</span>
-<span>    AMT_AE_RATIO <span class="op">=</span> <span class="va">MORT_ACTUAL_AMT</span> <span class="op">/</span> <span class="va">MORT_EXPECTED_AMT</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  expstudy <span class="op">=</span> <span class="va">mortexp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>    <span class="va">summarise_measures</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="reference/mutate_metrics.html">mutate_metrics</a></span><span class="op">(</span></span>
-<span>      metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>AE_RATIO <span class="op">=</span> <span class="va">ae_ratio</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-9-1.png"></p>
-<p>Whenever there is not enough credibility for a company to write their own assumption, adjustment factors are often used to incorporate emerging experience. expstudy provides a function to determine factor adjustments for each provided set of measures using a variety of methods.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mortexp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span></span>
-<span>    <span class="va">GENDER</span>,</span>
-<span>    <span class="va">SMOKING_STATUS</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/compute_fct_adjs.html">compute_fct_adjs</a></span><span class="op">(</span></span>
-<span>    expected_rate <span class="op">=</span> <span class="va">EXPECTED_MORTALITY_RT</span>,</span>
-<span>    amount_scalar <span class="op">=</span> <span class="va">FACE_AMOUNT</span>,</span>
-<span>    method <span class="op">=</span> <span class="st">'sequential'</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; $CNT</span></span>
-<span><span class="co">#&gt;   SMOKING_STATUS GENDER GENDER_FCT_ADJ SMOKING_STATUS_FCT_ADJ COMPOSITE_FCT_ADJ</span></span>
-<span><span class="co">#&gt; 1     NON-SMOKER FEMALE       1.271511              1.0194734          1.296272</span></span>
-<span><span class="co">#&gt; 2     NON-SMOKER   MALE       1.193514              1.0194734          1.216755</span></span>
-<span><span class="co">#&gt; 3         SMOKER FEMALE       1.271511              0.9515988          1.209968</span></span>
-<span><span class="co">#&gt; 4         SMOKER   MALE       1.193514              0.9515988          1.135746</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cb12991/expstudy" class="external-link">expstudy</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $AMT</span></span>
-<span><span class="co">#&gt;   SMOKING_STATUS GENDER GENDER_FCT_ADJ SMOKING_STATUS_FCT_ADJ COMPOSITE_FCT_ADJ</span></span>
-<span><span class="co">#&gt; 1     NON-SMOKER FEMALE       1.307949               0.998288          1.305710</span></span>
-<span><span class="co">#&gt; 2     NON-SMOKER   MALE       1.129454               0.998288          1.127520</span></span>
-<span><span class="co">#&gt; 3         SMOKER FEMALE       1.307949               1.004059          1.313259</span></span>
-<span><span class="co">#&gt; 4         SMOKER   MALE       1.129454               1.004059          1.134039</span></span></code></pre></div>
-<p>Refer to each function’s documentation page for additional detail.</p>
+<span><span class="co">#&gt; Attaching package: 'expstudy'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     aggregate, filter</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     intersect, setdiff, union</span></span></code></pre></div>
+<p>First you need a dataset that can be used for an experience study. This package provides a sample mortality experience study to aid with examples:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">mortexp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 175,491</span></span>
+<span><span class="co">#&gt; Columns: 18</span></span>
+<span><span class="co">#&gt; $ AS_OF_DATE            &lt;date&gt; 1998-04-30, 1998-05-31, 1998-06-30, 1998-07-31,~</span></span>
+<span><span class="co">#&gt; $ POLICY_HOLDER         &lt;fct&gt; PH_0001, PH_0001, PH_0001, PH_0001, PH_0001, PH_~</span></span>
+<span><span class="co">#&gt; $ GENDER                &lt;fct&gt; MALE, MALE, MALE, MALE, MALE, MALE, MALE, MALE, ~</span></span>
+<span><span class="co">#&gt; $ SMOKING_STATUS        &lt;fct&gt; NON-SMOKER, NON-SMOKER, NON-SMOKER, NON-SMOKER, ~</span></span>
+<span><span class="co">#&gt; $ UNDERWRITING_CLASS    &lt;fct&gt; STANDARD, STANDARD, STANDARD, STANDARD, STANDARD~</span></span>
+<span><span class="co">#&gt; $ INSURED_DOB           &lt;date&gt; 1948-09-10, 1948-09-10, 1948-09-10, 1948-09-10,~</span></span>
+<span><span class="co">#&gt; $ ISSUE_DATE            &lt;date&gt; 1998-04-12, 1998-04-12, 1998-04-12, 1998-04-12,~</span></span>
+<span><span class="co">#&gt; $ ISSUE_AGE             &lt;dbl&gt; 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, ~</span></span>
+<span><span class="co">#&gt; $ ATTAINED_AGE          &lt;dbl&gt; 50, 50, 50, 50, 50, 51, 51, 51, 51, 51, 51, 51, ~</span></span>
+<span><span class="co">#&gt; $ DURATION_MONTH        &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1~</span></span>
+<span><span class="co">#&gt; $ DURATION_YEAR         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, ~</span></span>
+<span><span class="co">#&gt; $ POLICY_STATUS         &lt;fct&gt; DEATH, DEATH, DEATH, DEATH, DEATH, DEATH, DEATH,~</span></span>
+<span><span class="co">#&gt; $ TERMINATION_DATE      &lt;date&gt; 2012-04-13, 2012-04-13, 2012-04-13, 2012-04-13,~</span></span>
+<span><span class="co">#&gt; $ EXPOSURE              &lt;dbl&gt; 0.04931507, 0.08219178, 0.07945205, 0.08219178, ~</span></span>
+<span><span class="co">#&gt; $ ACTUAL_DEATHS         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ~</span></span>
+<span><span class="co">#&gt; $ EXPECTED_MORTALITY_RT &lt;dbl&gt; 0.01428571, 0.01428571, 0.01428571, 0.01428571, ~</span></span>
+<span><span class="co">#&gt; $ EXPECTED_DEATHS       &lt;dbl&gt; 0.000704501, 0.001174168, 0.001135029, 0.0011741~</span></span>
+<span><span class="co">#&gt; $ VARIANCE_DEATHS       &lt;dbl&gt; 0.0007040047, 0.0011727896, 0.0011337411, 0.0011~</span></span></code></pre></div>
+<p>Now you can convert to an <code>expstudy</code> object:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Only need to specify which variables correlate to metric variable `actuals`, </span></span>
+<span><span class="co"># `expecteds`, and `exposures`. `variances` and `keys` are beneficial, but not</span></span>
+<span><span class="co"># required. </span></span>
+<span></span>
+<span><span class="va">es</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/expstudy.html">expstudy</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mortexp</span>,</span>
+<span>  actuals <span class="op">=</span> <span class="va">ACTUAL_DEATHS</span>,</span>
+<span>  expecteds <span class="op">=</span> <span class="va">EXPECTED_DEATHS</span>,</span>
+<span>  exposures <span class="op">=</span> <span class="va">EXPOSURE</span>,</span>
+<span>  variances <span class="op">=</span> <span class="va">VARIANCE_DEATHS</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>With this <code>expstudy</code> object, a quick example can be shown using <code><a href="reference/compile_results.html">compile_results()</a></code>:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># We will supply only the dataset and grouping variables to use for the </span></span>
+<span><span class="co"># summaries to generate a more robust list of results. </span></span>
+<span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/compile_results.html">compile_results</a></span><span class="op">(</span></span>
+<span>  expstudy <span class="op">=</span> <span class="va">es</span>,</span>
+<span>  <span class="va">GENDER</span>,</span>
+<span>  <span class="va">ATTAINED_AGE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The <code><a href="reference/compile_results.html">compile_results()</a></code> function combines many <code>expstudy</code> functions to produce many summaries. Since nothing other than the potential groupings were provided, <code>coompile_results()</code> will generate a nested list of summaries:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">results</span>, give.attr <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 2</span></span>
+<span><span class="co">#&gt;  $ UNFORMATTED:List of 2</span></span>
+<span><span class="co">#&gt;   ..$ METRICS    :List of 4</span></span>
+<span><span class="co">#&gt;   .. ..$ AGGREGATE                 : tbl_es [1 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY GENDER                 : tbl_es [2 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY ATTAINED_AGE           : tbl_es [83 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [166 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   ..$ PROPORTIONS:List of 4</span></span>
+<span><span class="co">#&gt;   .. ..$ AGGREGATE                 : tbl_es [1 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY GENDER                 : tbl_es [2 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY ATTAINED_AGE           : tbl_es [83 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [166 x 10] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ FORMATTED  :List of 2</span></span>
+<span><span class="co">#&gt;   ..$ METRICS    :List of 4</span></span>
+<span><span class="co">#&gt;   .. ..$ AGGREGATE                 : tbl_es [1 x 7] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY GENDER                 : tbl_es [2 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY ATTAINED_AGE           : tbl_es [83 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [166 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   ..$ PROPORTIONS:List of 4</span></span>
+<span><span class="co">#&gt;   .. ..$ AGGREGATE                 : tbl_es [1 x 8] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY GENDER                 : tbl_es [2 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY ATTAINED_AGE           : tbl_es [83 x 9] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   .. ..$ BY GENDER AND ATTAINED_AGE: tbl_es [166 x 10] (S3: tbl_es/tbl_df/tbl/data.frame)</span></span></code></pre></div>
+<p>An unformatted summary can be used for subsequent analysis…</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results</span><span class="op">$</span><span class="va">UNFORMATTED</span><span class="op">$</span><span class="va">METRICS</span><span class="op">$</span><span class="va">`BY GENDER`</span></span>
+<span><span class="co">#&gt; # A tibble: 2 x 8</span></span>
+<span><span class="co">#&gt;   GENDER ACTUAL_DEATHS EXPECTED_DEATHS EXPOSURE VARIANCE_DEATHS ACTUAL_TO_EXPEC~</span></span>
+<span><span class="co">#&gt; * &lt;fct&gt;          &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 FEMALE           134            107.    6098.            107.             1.25</span></span>
+<span><span class="co">#&gt; 2 MALE             215            145.    8166.            145.             1.48</span></span>
+<span><span class="co">#&gt; # ... with 2 more variables: ACTUAL_TO_EXPOSED &lt;dbl&gt;, EXPECTED_TO_EXPOSED &lt;dbl&gt;</span></span></code></pre></div>
+<p>…and a formatted summary can be quickly and simply inserted into a report to distribute nicely.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results</span><span class="op">$</span><span class="va">FORMATTED</span><span class="op">$</span><span class="va">PROPORTIONS</span><span class="op">$</span><span class="va">`BY ATTAINED_AGE`</span></span>
+<span><span class="co">#&gt; # A tibble: 83 x 9</span></span>
+<span><span class="co">#&gt;    ATTAINED_AGE ACTUAL_DEATHS EXPECTED_DEATHS EXPOSURE VARIANCE_DEATHS</span></span>
+<span><span class="co">#&gt;  *        &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;    &lt;chr&gt;          </span></span>
+<span><span class="co">#&gt;  1           19 0.00          0.21            21.66    0.21           </span></span>
+<span><span class="co">#&gt;  2           20 0.00          0.57            56.52    0.56           </span></span>
+<span><span class="co">#&gt;  3           21 0.00          0.66            65.52    0.66           </span></span>
+<span><span class="co">#&gt;  4           22 0.00          0.71            69.88    0.71           </span></span>
+<span><span class="co">#&gt;  5           23 0.00          0.83            80.32    0.83           </span></span>
+<span><span class="co">#&gt;  6           24 0.00          0.88            84.89    0.88           </span></span>
+<span><span class="co">#&gt;  7           25 0.00          0.98            93.39    0.98           </span></span>
+<span><span class="co">#&gt;  8           26 0.00          1.07            100.19   1.06           </span></span>
+<span><span class="co">#&gt;  9           27 2.00          1.20            111.25   1.20           </span></span>
+<span><span class="co">#&gt; 10           28 0.00          1.30            119.39   1.30           </span></span>
+<span><span class="co">#&gt; # ... with 73 more rows, and 4 more variables: PROP_ACTUAL_DEATHS &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   PROP_EXPECTED_DEATHS &lt;chr&gt;, PROP_EXPOSURE &lt;chr&gt;, PROP_VARIANCE_DEATHS &lt;chr&gt;</span></span></code></pre></div>
+<p>You can review and trim the summaries down to what you want without much effort. You also can access the formulae that are used in <code><a href="reference/compile_results.html">compile_results()</a></code> to fully customize the analysis to fit your needs.</p>
 </div>
-<div class="section level1">
-<h1 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
-</h1>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
 <p>Please note that the expstudy project is released with a <a href="https://cb12991.github.io/expstudy/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
-
+</div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -297,7 +229,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small>GPL (&gt;= 3) + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
@@ -327,11 +259,11 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=expstudy" class="external-link"><img src="https://www.r-pkg.org/badges/version/expstudy.png" alt="CRAN status"></a></li>
-<li><a href="https://github.com/cb12991/expstudy/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/cb12991/expstudy/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://github.com/cb12991/expstudy/actions/workflows/test-coverage.yaml" class="external-link"><img src="https://github.com/cb12991/expstudy/actions/workflows/test-coverage.yaml/badge.svg" alt="test-coverage"></a></li>
+<li><a href="https://github.com/cb12991/expstudy/actions" class="external-link"><img src="https://github.com/cb12991/expstudy/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://CRAN.R-project.org/package=expstudy" class="external-link"><img src="https://www.r-pkg.org/badges/version/expstudy" alt="CRAN status"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://mybinder.org/v2/gh/cb12991/expstudy/main" class="external-link"><img src="https://mybinder.org/badge_logo.svg" alt="Launch binder"></a></li>
 <li><a href="https://app.codecov.io/gh/cb12991/expstudy?branch=main" class="external-link"><img src="https://codecov.io/gh/cb12991/expstudy/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://cranlogs.r-pkg.org/badges/grand-total/expstudy" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/expstudy.svg" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
 </div>
 

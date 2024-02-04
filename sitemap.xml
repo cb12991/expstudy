@@ -28,33 +28,48 @@
     <loc>https://cb12991.github.io/expstudy/news/index.html</loc>
   </url>
   <url>
-    <loc>https://cb12991.github.io/expstudy/reference/compute_fct_adjs.html</loc>
+    <loc>https://cb12991.github.io/expstudy/reference/add_credibility.html</loc>
   </url>
   <url>
-    <loc>https://cb12991.github.io/expstudy/reference/defunct.html</loc>
+    <loc>https://cb12991.github.io/expstudy/reference/add_metrics.html</loc>
+  </url>
+  <url>
+    <loc>https://cb12991.github.io/expstudy/reference/add_proportions.html</loc>
+  </url>
+  <url>
+    <loc>https://cb12991.github.io/expstudy/reference/aggregate.html</loc>
+  </url>
+  <url>
+    <loc>https://cb12991.github.io/expstudy/reference/compile_results.html</loc>
   </url>
   <url>
     <loc>https://cb12991.github.io/expstudy/reference/expstudy-package.html</loc>
   </url>
   <url>
-    <loc>https://cb12991.github.io/expstudy/reference/guess_measure_sets.html</loc>
+    <loc>https://cb12991.github.io/expstudy/reference/expstudy.html</loc>
+  </url>
+  <url>
+    <loc>https://cb12991.github.io/expstudy/reference/format_metrics.html</loc>
   </url>
   <url>
     <loc>https://cb12991.github.io/expstudy/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://cb12991.github.io/expstudy/reference/metrics.html</loc>
+    <loc>https://cb12991.github.io/expstudy/reference/is_expstudy.html</loc>
   </url>
   <url>
     <loc>https://cb12991.github.io/expstudy/reference/mortexp.html</loc>
   </url>
   <url>
-    <loc>https://cb12991.github.io/expstudy/reference/mutate_expecvar.html</loc>
+    <loc>https://cb12991.github.io/expstudy/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://cb12991.github.io/expstudy/reference/mutate_metrics.html</loc>
+    <loc>https://cb12991.github.io/expstudy/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://cb12991.github.io/expstudy/reference/summarise_measures.html</loc>
+    <loc>https://cb12991.github.io/expstudy/reference/tbl_es-class.html</loc>
+  </url>
+  <url>
+    <loc>https://cb12991.github.io/expstudy/reference/tidyeval.html</loc>
   </url>
 </urlset>
