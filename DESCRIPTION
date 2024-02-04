@@ -1,6 +1,6 @@
 Package: expstudy
 Title: Tools for Actuarial Experience Studies
-Version: 2.0.0
+Version: 2.0.0.9000
 Authors@R: 
     person("Cody", "Buehler", , "cb12991@me.com", role = c("aut", "cre"))
 Description: Experiences studies are an integral component of the actuarial 
