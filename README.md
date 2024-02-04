@@ -6,13 +6,13 @@
 <!-- badges: start -->
 
 [![CRAN
-status](https://www.r-pkg.org/badges/version/expstudy.png)](https://CRAN.R-project.org/package=expstudy)
+status](https://www.r-pkg.org/badges/version-ago/expstudy)](https://CRAN.R-project.org/package=expstudy)
 [![R-CMD-check](https://github.com/cb12991/expstudy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cb12991/expstudy/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/cb12991/expstudy/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/cb12991/expstudy/actions/workflows/test-coverage.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/cb12991/expstudy/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cb12991/expstudy?branch=main)
 [![CRAN RStudio mirror
-downloads](https://cranlogs.r-pkg.org/badges/grand-total/expstudy.svg)](https://cranlogs.r-pkg.org/badges/grand-total/expstudy)
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/expstudy)](https://cranlogs.r-pkg.org/badges/grand-total/expstudy)
 <!-- badges: end -->
 
 The goal of expstudy is to provide a set of tools to quickly conduct
