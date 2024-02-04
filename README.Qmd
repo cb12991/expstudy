@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/cb12991/expstudy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cb12991/expstudy/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/cb12991/expstudy/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/cb12991/expstudy/actions/workflows/test-coverage.yaml)
 [![Codecov test coverage](https://codecov.io/gh/cb12991/expstudy/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cb12991/expstudy?branch=main)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/expstudy.png)](http://www.r-pkg.org/pkg/expstudy)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/expstudy.svg)](https://cranlogs.r-pkg.org/badges/grand-total/expstudy)
 <!-- badges: end -->
 
 The goal of expstudy is to provide a set of tools to quickly conduct analysis of an experience study. Commonly used techniques (such as actual-to-expected analysis) are generalized and streamlined so that repetitive coding is avoided. 

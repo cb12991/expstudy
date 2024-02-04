@@ -12,7 +12,7 @@ status](https://www.r-pkg.org/badges/version/expstudy.png)](https://CRAN.R-proje
 [![Codecov test
 coverage](https://codecov.io/gh/cb12991/expstudy/branch/main/graph/badge.svg)](https://app.codecov.io/gh/cb12991/expstudy?branch=main)
 [![CRAN RStudio mirror
-downloads](http://cranlogs.r-pkg.org/badges/expstudy.png)](http://www.r-pkg.org/pkg/expstudy)
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/expstudy.svg)](https://cranlogs.r-pkg.org/badges/grand-total/expstudy)
 <!-- badges: end -->
 
 The goal of expstudy is to provide a set of tools to quickly conduct
