@@ -9,7 +9,7 @@ Description: Experiences studies are an integral component of the actuarial
     package aims to reduce time spent writing the same code used for 
     different experience studies, therefore increasing the time for to uncover
     new insights inherit within the relevant experience.
-License: GPL (>= 3) + file LICENSE
+License: GPL (>= 3)
 URL: https://github.com/cb12991/expstudy, https://cb12991.github.io/expstudy/
 BugReports: https://github.com/cb12991/expstudy/issues
 Depends: 
