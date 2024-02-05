@@ -1,4 +1,6 @@
-Resubmission. Changed badge URL to secure HTTPS protocol from HTTP.
+Resubmission #2: fixed license issue by removing additional LICENSE file and updating DESCRIPTION's License key to "GPL (>= 3)" instead of "GPL (>= 3) + file LICENSE" 
+
+Resubmission #1: changed badge URL to secure HTTPS protocol from HTTP.
 
 # R CMD check results 
 
