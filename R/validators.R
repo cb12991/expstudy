@@ -172,7 +172,7 @@ validate_data_column <- function(
     )
   }
 
-  if (!is.null(ptype) && !inherits(data[[x]], class(ptype)) {
+  if (!is.null(ptype) && !inherits(data[[x]], class(ptype))) {
     cli::cli_abort(
       'error_column_type',
       message = paste(
