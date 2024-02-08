@@ -172,12 +172,12 @@ validate_data_column <- function(
     )
   }
 
-  if (!is.null(ptype) && !inherits(data[[x]], class(ptype))) {
+  if (!is.null(ptype) && mode(data[[x]]) != mode(ptype)) {
     cli::cli_abort(
-      'error_column_type',
+      'error_column_mode',
       message = paste(
-        '{.var {x}} must inherit class {.cls {class(ptype)}} but is class',
-        '{.cls {class(data[[x]])}} instead.'
+        '{.var {x}} needs to be of data mode {.cls {mode(ptype)}}, not',
+        '{.cls {mode(data[[x]])}}.'
       ),
       call = error_call
     )
