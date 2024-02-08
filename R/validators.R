@@ -172,12 +172,12 @@ validate_data_column <- function(
     )
   }
 
-  if (!is.null(ptype) && typeof(data[[x]]) != typeof(ptype)) {
+  if (!is.null(ptype) && !inherits(data[[x]], class(ptype)) {
     cli::cli_abort(
       'error_column_type',
       message = paste(
-        '{.var {x}} should have data type {.cls {class(ptype)}}, not',
-        '{.cls {class(data[[x]])}}'
+        '{.var {x}} must inherit class {.cls {class(ptype)}} but is class',
+        '{.cls {class(data[[x]])}} instead.'
       ),
       call = error_call
     )
