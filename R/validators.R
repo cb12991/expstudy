@@ -176,8 +176,8 @@ validate_data_column <- function(
     cli::cli_abort(
       'error_column_type',
       message = paste(
-        '{.var {x}} should have data type {.cls {class(ptype)}, not',
-        '{.cls {class(data[[x]])}'
+        '{.var {x}} should have data type {.cls {class(ptype)}}, not',
+        '{.cls {class(data[[x]])}}'
       ),
       call = error_call
     )
