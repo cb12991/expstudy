@@ -57,7 +57,7 @@
 #'   )
 #'
 #' @export
-compute_fct_adjs <- function(
+compute_fct_adjs2 <- function(
     .data,
     expected_rate,
     measure_sets = guess_measure_sets(.data),
@@ -87,15 +87,6 @@ compute_fct_adjs <- function(
     validate_obj_type(arg, logical(1), error_call = error_call)
   }
 
-  # Determine iterations using groups (if any). If .data not grouped then
-  # results will also not be grouped and an aggregate adjustment will be
-  # returned.
-  if (dplyr::is_grouped_df(.data)) {
-    grps <- dplyr::groups(.data)
-  } else {
-    grps <- rlang::quos(NULL)
-  }
-
   # Assign names to measure sets if not provided.
   if (is.null(names(measure_sets))) {
     cli::cli_warn(paste(
@@ -105,48 +96,64 @@ compute_fct_adjs <- function(
     names(measure_sets) <- paste0('MS', seq_along(measure_sets))
   }
 
+  # TODO: incorporate `method` argument (currently ignored).
+
+  # Determine iterations using groups (if any). If .data not grouped then
+  # results will also not be grouped and an aggregate adjustment will be
+  # returned.
+  if (dplyr::is_grouped_df(.data)) {
+    grps <- dplyr::groups(.data)
+  } else {
+    grps <- rlang::quos(NULL)
+  }
+
   # Initialize result by combining grouping structure (a 0-column tibble will
   # be returned if .data not grouped) and an empty double column per each
   # factor adjustment name.
   adjs <- list()
-
+  ungrpd_data_table <- data.table::as.data.table(dplyr::ungroup(.data))
   for (measure_set_nm in names(measure_sets)) {
     adjs[[measure_set_nm]] <- list()
 
     for (grp_i in seq_along(grps)) {
-      # browser()
       if (rlang::is_quosure(grps[[grp_i]])) {
         adj_grp_nm <- 'AGGREGATE'
       } else {
         adj_grp_nm <- rlang::as_name(grps[[grp_i]])
       }
-      if (grp_i == 1) {
-        prev_adjs <- list(INIT = data.frame(INIT_FCT_ADJ = 1))
-      } else {
-        prev_adjs <- adjs[[measure_set_nm]][1:(grp_i - 1)]
-      }
-      mutate_quo <- rlang::parse_expr(paste(
-        c(
-          rlang::as_name(rlang::ensym(expected_rate)),
-          paste0(names(prev_adjs), '_FCT_ADJ')
-        ),
-        collapse = ' * '
-      ))
-
-      adjs[[measure_set_nm]][[adj_grp_nm]] <- Reduce(
-        f = \(df, adj) merge(df, adj, all.x = TRUE),
-        x = prev_adjs,
-        init = dplyr::mutate(.data, INIT_FCT_ADJ = 1)
+      adjs[[measure_set_nm]][[adj_grp_nm]] <- (
+        if (grp_i == 1) {
+          ungrpd_data_table
+        } else {
+          prev_adjs <- adjs[[measure_set_nm]][1:(grp_i - 1)]
+          prev_adjs_grid <- Reduce(
+            f = \(grid, prev_adj) merge(grid, prev_adj),
+            x = prev_adjs,
+            init = expand.grid(lapply(prev_adjs, \(x) x[[1]]))
+          )
+          mutate_quo <- rlang::parse_expr(paste(
+            c(
+              rlang::as_name(rlang::ensym(expected_rate)),
+              paste0(names(prev_adjs), '_FCT_ADJ')
+            ),
+            collapse = ' * '
+          ))
+          merge(
+            ungrpd_data_table,
+            prev_adjs_grid,
+            all.x = TRUE
+          ) |>
+            dplyr::mutate(
+              FCT_ADJ_RATE = !!mutate_quo
+            ) |>
+            mutate_expecvar(
+              new_expected_rates = 'FCT_ADJ_RATE',
+              new_expecvar_prefix = NULL,
+              measure_sets = measure_sets,
+              amount_scalar = {{ amount_scalar }}
+            )
+        }
       ) |>
-        dplyr::mutate(
-          FCT_ADJ_RATE = !!mutate_quo
-        ) |>
-        mutate_expecvar(
-          new_expected_rates = 'FCT_ADJ_RATE',
-          new_expecvar_prefix = NULL,
-          measure_sets = measure_sets,
-          amount_scalar = {{ amount_scalar }}
-        ) |>
         dplyr::group_by(
           !!grps[[grp_i]]
         ) |>
@@ -191,30 +198,39 @@ compute_fct_adjs <- function(
         if (balance_adjs) {
           # This scalar is simply the AE after applying all
           # credibility-weighted adjustments up to this iteration.
-          scalar <- Reduce(
-            f = \(df, adj) merge(df, adj, all.x = TRUE),
-            x = adjs[[measure_set_nm]],
-            init = .data |>
-              dplyr::mutate(
-                INIT_FCT_ADJ = 1
-              ) |>
-              dplyr::ungroup()
-          ) |>
-            dplyr::mutate(
-              FCT_ADJ_RATE = !!rlang::parse_expr(paste(
+
+          scalar <- (
+            if (grp_i == 1) {
+              ungrpd_data_table
+            } else {
+              curr_iter_adj_grid <- Reduce(
+                f = \(grid, adj) merge(grid, adj),
+                x = adjs[[measure_set_nm]],
+                init = expand.grid(lapply(adjs[[measure_set_nm]], \(x) x[[1]]))
+              )
+              mutate_quo <- rlang::parse_expr(paste(
                 c(
                   rlang::as_name(rlang::ensym(expected_rate)),
                   paste0(names(adjs[[measure_set_nm]]), '_FCT_ADJ')
                 ),
                 collapse = ' * '
               ))
-            ) |>
-            mutate_expecvar(
-              new_expected_rates = 'FCT_ADJ_RATE',
-              new_expecvar_prefix = NULL,
-              measure_sets = measure_sets,
-              amount_scalar = {{ amount_scalar }}
-            ) |>
+              merge(
+                ungrpd_data_table,
+                curr_iter_adj_grid,
+                all.x = TRUE
+              ) |>
+                dplyr::mutate(
+                  FCT_ADJ_RATE = !!mutate_quo
+                ) |>
+                mutate_expecvar(
+                  new_expected_rates = 'FCT_ADJ_RATE',
+                  new_expecvar_prefix = NULL,
+                  measure_sets = measure_sets,
+                  amount_scalar = {{ amount_scalar }}
+                )
+            }
+          ) |>
             summarise_measures(
               na.rm = na.rm
             ) |>
@@ -232,6 +248,7 @@ compute_fct_adjs <- function(
             dplyr::pull(
               scalar
             )
+
           adjs[[measure_set_nm]][[adj_grp_nm]] <- dplyr::mutate(
             adjs[[measure_set_nm]][[adj_grp_nm]],
             !!paste0(adj_grp_nm, '_FCT_ADJ') :=
