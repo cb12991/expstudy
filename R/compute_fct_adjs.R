@@ -57,7 +57,7 @@
 #'   )
 #'
 #' @export
-compute_fct_adjs2 <- function(
+compute_fct_adjs <- function(
     .data,
     expected_rate,
     measure_sets = guess_measure_sets(.data),
